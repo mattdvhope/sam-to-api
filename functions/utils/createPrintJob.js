@@ -11,7 +11,8 @@ const timestampForOrder = () => {
 
 const createPrintJob = async (orderSummary) => {
 
-    console.log(orderSummary);
+    console.log("CITY: ", orderSummary.shipping_address.city);
+    console.log("PHONE: ", orderSummary.customer.phone);
 
     if (!orderSummary || !orderSummary.customer || !orderSummary.items) {
         console.error('Invalid order summary structure:', orderSummary);
@@ -39,21 +40,21 @@ const createPrintJob = async (orderSummary) => {
         })),
         "production_delay": 120,
         "shipping_address": {
-            // "city": orderSummary.shipping_address.city,
-            // "country_code": orderSummary.shipping_address.country === 'USA' ? 'US' : orderSummary.shipping_address.country,
-            // "name": `${orderSummary.customer.first_name} ${orderSummary.customer.last_name}`, // Full name from customer
-            // "phone_number": orderSummary.customer.phone,
-            // "postcode": orderSummary.shipping_address.postal_code,
-            // "state_code": orderSummary.shipping_address.region, // State/region from orderSummary
-            // "street1": orderSummary.shipping_address.address_line_1
+            "city": orderSummary.shipping_address.city,
+            "country_code": orderSummary.shipping_address.country === 'USA' ? 'US' : orderSummary.shipping_address.country,
+            "name": `${orderSummary.customer.first_name} ${orderSummary.customer.last_name}`, // Full name from customer
+            "phone_number": orderSummary.customer.phone,
+            "postcode": orderSummary.shipping_address.postal_code,
+            "state_code": orderSummary.shipping_address.region, // State/region from orderSummary
+            "street1": orderSummary.shipping_address.address_line_1
 
-            "city": "Lübeck",
-            "country_code": "GB",
-            "name": "Hans Dampf",
-            "phone_number": "844-212-0689",
-            "postcode": "PO1 3AX",
-            "state_code": "",
-            "street1": "Holstenstr. 48"
+            // "city": "Lübeck",
+            // "country_code": "GB",
+            // "name": "Hans Dampf",
+            // "phone_number": "844-212-0689",
+            // "postcode": "PO1 3AX",
+            // "state_code": "",
+            // "street1": "Holstenstr. 48"
 
         },
         "shipping_level": "MAIL" // Default or dynamic shipping level can be used here
