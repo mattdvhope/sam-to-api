@@ -1,8 +1,8 @@
 [build]
   functions = "functions"  # Update this line to your preferred directory name
-  environment = { 
-    GO_VERSION = "1.19.6"  # Specify a valid Go version
-  }
+
+[build.environment]
+  GO_VERSION = "1.19.6"  # Specify a valid Go version
 
 [functions]
   node_bundler = "esbuild"  # Optional: specify the bundler (esbuild is recommended)
