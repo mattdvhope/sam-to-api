@@ -1,13 +1,16 @@
 [build]
-  functions = "functions"  # Directory where your serverless functions are located
+  functions = "functions"  # Update this line to your preferred directory name
+  environment = { 
+    GO_VERSION = "1.19.6"  # Specify a valid Go version
+  }
 
 [functions]
   node_bundler = "esbuild"  # Optional: specify the bundler (esbuild is recommended)
 
 [[headers]]
-  for = "/*"  # Apply headers to all routes
+  for = "/*"
     [headers.values]
       Access-Control-Allow-Origin = "https://soaw.samcart.com"
       Access-Control-Allow-Headers = "Content-Type"
       Access-Control-Allow-Methods = "POST, OPTIONS"
-      Access-Control-Allow-Credentials = "true"  # Ensure true is in quotes for proper format
+      Access-Control-Allow-Credentials = true
