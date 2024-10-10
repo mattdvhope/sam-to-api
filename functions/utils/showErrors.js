@@ -1,4 +1,4 @@
-const showLuluErrors = (errorData) => {
+const showErrors = (errorData) => {
   // Collect all instances of the key "message"
   const allInstances = findAllKeyValuePairs(errorData, "message");
 
@@ -32,5 +32,5 @@ function findAllKeyValuePairs(data, targetKey, results = []) {
   return results;  // Return the array of found key-value pairs
 }
 
-export default showLuluErrors;
+export default showErrors;
 

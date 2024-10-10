@@ -1,7 +1,7 @@
 // functions/utils/createPrintJob.js
 import axios from 'axios';
 import { getApiConfig } from './apiConfig';
-import showLuluErrors from './showLuluErrors';
+import showErrors from './showErrors';
 
 // Function to generate dynamic timestamp for order external_id
 const timestampForOrder = () => {
@@ -68,7 +68,7 @@ const createPrintJob = async (orderSummary) => {
         );
         console.log('Print Job Created:', response.data);
     } catch (errorData) {
-        console.error('Error Creating Print Job:', showLuluErrors(errorData));
+        console.error('Error Creating Print Job:', showErrors(errorData));
     }
 };
 
