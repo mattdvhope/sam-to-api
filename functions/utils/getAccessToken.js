@@ -3,7 +3,7 @@ import axios from 'axios'; // Directly import axios
 const getAccessToken = async () => {
   const apiBaseURL = process.env.SAM_SANDBOX_PRINT_JOBS;
 
-  const url = `${apiBaseURL}${process.env.SAM_LULU_AUTH}`; // Use the correct path
+  const url = `${apiBaseURL}${process.env.SAM_AUTH}`; // Use the correct path
 
   const data = new URLSearchParams({
     'grant_type': process.env.SAM_GRANT_TYPE,
