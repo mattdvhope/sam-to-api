@@ -4,7 +4,7 @@ import { getApiConfig } from './apiConfig';
 import showErrors from './showErrors';
 import validateOrderSummary from './validateOrderSummary';
 import createRequestBody from './createRequestBody'; // Import the request body function
-import createLineItems from './createLineItems'; // Import the new function
+import createLineItems from './createLineItems'; // Import the new function.
 
 const createPrintJob = async (orderSummary) => {
     if (!validateOrderSummary(orderSummary)) return;
