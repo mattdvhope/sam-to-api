@@ -62,8 +62,7 @@ const createPrintJob = async (orderSummary) => {
             requestBody,
             { headers: myHeaders }
         );
-            console.log("Response: ", response);
-            // console.log(response.data); // Successfully got data
+            console.log(response.data); // Successfully got data
         } catch (errorData) {
             console.error('Error Creating Print Job:', showErrors(errorData));
         }
