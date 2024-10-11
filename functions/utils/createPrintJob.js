@@ -33,7 +33,7 @@ const createPrintJob = async (orderSummary) => {
                 "interior": {
                     "source_url": process.env.SAM_PB_IN
                 },
-                "pod_package_id": "0600X0900BWSTDPB060UW444MXX"
+                "pod_package_id": process.env.SAM_PB_PPI
             },
             "quantity": item.quantity, // Quantity from orderSummary items
             "title": item.product_name // Product title from orderSummary
