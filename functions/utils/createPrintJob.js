@@ -28,10 +28,10 @@ const createPrintJob = async (orderSummary) => {
             "external_id": `item-${item.product_id}`, // Unique reference for each item
             "printable_normalization": {
                 "cover": {
-                    "source_url": "https://www.dropbox.com/s/7bv6mg2tj0h3l0r/lulu_trade_perfect_template.pdf?dl=1&raw=1"
+                    "source_url": process.env.SAM_PB_CV
                 },
                 "interior": {
-                    "source_url": "https://www.dropbox.com/s/r20orb8umqjzav9/lulu_trade_interior_template-32.pdf?dl=1&raw=1"
+                    "source_url": process.env.SAM_PB_IN
                 },
                 "pod_package_id": "0600X0900BWSTDPB060UW444MXX"
             },
@@ -47,15 +47,6 @@ const createPrintJob = async (orderSummary) => {
             "postcode": orderSummary.shipping_address.postal_code,
             "state_code": orderSummary.shipping_address.region, // State/region from orderSummary
             "street1": orderSummary.shipping_address.address_line_1
-
-            // "city": "Lübeck",
-            // "country_code": "GB",
-            // "name": "Hans Dampf",
-            // "phone_number": "844-212-0689",
-            // "postcode": "PO1 3AX",
-            // "state_code": "",
-            // "street1": "Holstenstr. 48"
-
         },
         "shipping_level": "MAIL" // Default or dynamic shipping level can be used here
     };
