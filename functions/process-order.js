@@ -24,9 +24,9 @@ exports.handler = async (event) => {
     try {
         const parsedBody = JSON.parse(event.body);
         const orderSummary = parsedBody.orderSummary;
-console.log("before createPrintJob");
+
         await createPrintJob(orderSummary);
-console.log("after createPrintJob");
+
         return buildResponse(200, { message: 'Order processed successfully', orderId: orderSummary.id });
     } catch (error) {
         return buildResponse(500, { message: 'Internal Server Error', error: error.message });
