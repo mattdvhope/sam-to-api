@@ -53,7 +53,7 @@ const createPrintJob = async (orderSummary) => {
           "state_code": orderSummary.shipping_address.region, // State/region from orderSummary
           "street1": orderSummary.shipping_address.address_line_1
       },
-      "shipping_level": "MAIL" // Default or dynamic shipping level can be used here
+      "shipping_level": "MAIL" // Default or dynamic shipping level can be used here.
     };
 
     try {
