@@ -28,15 +28,15 @@ const createPrintJob = async (orderSummary) => {
             "external_id": `item-${item.product_id}`, // Unique reference for each item
             "printable_normalization": {
                 "cover": {
-                    "source_url": "https://www.dropbox.com/s/7bv6mg2tj0h3l0r/lulu_trade_perfect_template.pdf?dl=1&raw=1"
-                    // "source_url": process.env.SAM_PB_CV
+                    // "source_url": "https://www.dropbox.com/s/7bv6mg2tj0h3l0r/lulu_trade_perfect_template.pdf?dl=1&raw=1"
+                    "source_url": process.env.SAM_PB_CV
                 },
                 "interior": {
-                    "source_url": "https://www.dropbox.com/s/r20orb8umqjzav9/lulu_trade_interior_template-32.pdf?dl=1&raw=1"
-                    // "source_url": process.env.SAM_PB_IN
+                    // "source_url": "https://www.dropbox.com/s/r20orb8umqjzav9/lulu_trade_interior_template-32.pdf?dl=1&raw=1"
+                    "source_url": process.env.SAM_PB_IN
                 },
-                "pod_package_id": "0600X0900BWSTDPB060UW444MXX"
-                // "pod_package_id": process.env.SAM_PB_PPI
+                // "pod_package_id": "0600X0900BWSTDPB060UW444MXX"
+                "pod_package_id": process.env.SAM_PB_PPI
             },
             "quantity": item.quantity, // Quantity from orderSummary items
             "title": item.product_name // Product title from orderSummary
@@ -55,12 +55,18 @@ const createPrintJob = async (orderSummary) => {
     };
 
     try {
+        console.log("in try: ", orderSummary.customer.first_name)
         const response = await axios.post(
             `${apiBaseURL}print-jobs/`,
             requestBody,
             { headers: myHeaders }
         );
-        console.log('Print Job Created:', response.data);
+        if (response.status >= 400) {
+            console.log(`Error: ${response.status} - ${response.statusText}`);
+        } else {
+            console.log(response.data); // Successfully got data
+        }
+        // console.log('Print Job Created:', response.data);
     } catch (errorData) {
         console.error('Error Creating Print Job:', showErrors(errorData));
     }

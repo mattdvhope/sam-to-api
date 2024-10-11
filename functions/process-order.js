@@ -26,7 +26,6 @@ exports.handler = async (event) => {
         const orderSummary = parsedBody.orderSummary;
 
         console.log('Order Summary:', orderSummary);
-        console.log('Order Summary ID:', orderSummary.id);
 
         // Invoke createPrintJob with the order summary
         await createPrintJob(orderSummary);
