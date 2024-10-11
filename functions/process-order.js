@@ -25,9 +25,6 @@ exports.handler = async (event) => {
         const parsedBody = JSON.parse(event.body);
         const orderSummary = parsedBody.orderSummary;
 
-        console.log('Order Summary:', orderSummary);
-
-        // Invoke createPrintJob with the order summary
         await createPrintJob(orderSummary);
 
         return buildResponse(200, { message: 'Order processed successfully', orderId: orderSummary.id });
