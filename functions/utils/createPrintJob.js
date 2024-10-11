@@ -13,15 +13,15 @@ const createPrintJob = async (orderSummary) => {
 
     const items = [ // book(s)
         {
-            cover: process.env.SAM_PB_CV,
-            interior: process.env.SAM_PB_IN,
-            podPackageId: process.env.SAM_PB_PPI,
-        }, // add more books as needed
-        {
             cover: process.env.SAM_HC_CV,
             interior: process.env.SAM_HC_IN,
             podPackageId: process.env.SAM_HC_PPI,
-        }
+        },
+        // {
+        //     cover: process.env.SAM_PB_CV,
+        //     interior: process.env.SAM_PB_IN,
+        //     podPackageId: process.env.SAM_PB_PPI,
+        // }, // add more books as needed
     ];
 
     const lineItems = createLineItems(orderSummary, items);
