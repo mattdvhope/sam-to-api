@@ -10,10 +10,6 @@ const timestampForOrder = () => {
 };
 
 const createPrintJob = async (orderSummary) => {
-
-    console.log("CITY: ", orderSummary.shipping_address.city);
-    console.log("PHONE: ", orderSummary.customer.phone);
-
     if (!orderSummary || !orderSummary.customer || !orderSummary.items) {
         console.error('Invalid order summary structure:', orderSummary);
         return; // Exit if orderSummary is invalid
@@ -57,11 +53,13 @@ const createPrintJob = async (orderSummary) => {
     };
 
     try {
+        console.log("in try");
         const response = await axios.post(
             `${apiBaseURL}print-jobs/`,
             requestBody,
             { headers: myHeaders }
         );
+            console.log("after axios post");
             console.log(response.data); // Successfully got data
         } catch (errorData) {
             console.error('Error Creating Print Job:', showErrors(errorData));
