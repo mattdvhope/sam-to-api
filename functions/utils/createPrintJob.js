@@ -63,6 +63,7 @@ const createPrintJob = async (orderSummary) => {
         );
         if (response.status >= 400) {
             console.log(`Error: ${response.status} - ${response.statusText}`);
+            console.log(showErrors(errorData));
         } else {
             console.log(response.data); // Successfully got data
         }
