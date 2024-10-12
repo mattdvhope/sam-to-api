@@ -1,5 +1,5 @@
 // functions/utils/createPbPrintJob.js
-import createPrintJob from './createPrintJob'; // Import the new function
+import createPrintJob from './createPrintJob';
 
 const createPbPrintJob = async (orderSummary) => {
     const books = [];
