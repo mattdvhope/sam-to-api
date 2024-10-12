@@ -11,21 +11,21 @@ const createPrintJob = async (orderSummary) => {
 
     const { apiBaseURL, myHeaders } = await getApiConfig();
 
-    const items = [];
+    const books = [];
 
-    items.push({
+    books.push({
         cover: process.env.SAM_HC_CV,
         interior: process.env.SAM_HC_IN,
         podPackageId: process.env.SAM_HC_PPI,
     });
 
-    items.push({
+    books.push({
         cover: process.env.SAM_PB_CV,
         interior: process.env.SAM_PB_IN,
         podPackageId: process.env.SAM_PB_PPI,
     });
 
-    const lineItems = createLineItems(orderSummary, items);
+    const lineItems = createLineItems(orderSummary, books);
     const shippingLevel = "MAIL";
     const requestBody = createRequestBody(orderSummary, lineItems, shippingLevel);
 
