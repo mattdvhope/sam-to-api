@@ -11,10 +11,8 @@ const createPrintJob = async (orderSummary) => {
 
     const { apiBaseURL, myHeaders } = await getApiConfig();
 
-    // Start with an empty array for items
-    const items = []; // Initialize an empty array
+    const items = [];
 
-    // Push each item object into the items array
     items.push({
         cover: process.env.SAM_HC_CV,
         interior: process.env.SAM_HC_IN,
@@ -27,7 +25,6 @@ const createPrintJob = async (orderSummary) => {
         podPackageId: process.env.SAM_PB_PPI,
     });
 
-    // Now items contains both item objects
     const lineItems = createLineItems(orderSummary, items);
     const shippingLevel = "MAIL";
     const requestBody = createRequestBody(orderSummary, lineItems, shippingLevel);
