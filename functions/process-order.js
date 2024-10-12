@@ -1,20 +1,6 @@
 // app/functions/process-order.js
 import createPrintJob from './utils/createPrintJob';
-
-// Define common headers for CORS
-const commonHeaders = {
-    'Access-Control-Allow-Origin': 'https://soaw.samcart.com',
-    'Access-Control-Allow-Headers': 'Content-Type',
-    'Access-Control-Allow-Methods': 'POST, OPTIONS',
-    'Access-Control-Allow-Credentials': true,
-};
-
-// Helper function for building the response
-const buildResponse = (statusCode, body) => ({
-    statusCode,
-    headers: commonHeaders,
-    body: JSON.stringify(body),
-});
+import buildResponse from './utils/buildResponse'; // Import the buildResponse function
 
 exports.handler = async (event) => {
     if (event.httpMethod === 'OPTIONS') {
