@@ -1,5 +1,5 @@
 // functions/utils/createHcPrintJob.js
-import createPrintJob from './createPrintJob'; // Import the new function
+import createPrintJob from './createPrintJob';
 
 const createHcPrintJob = async (orderSummary) => {
     const books = [];
