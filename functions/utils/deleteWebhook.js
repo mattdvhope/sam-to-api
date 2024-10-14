@@ -8,7 +8,7 @@ const deleteWebhook = async () => {
 
   try {
     const response = await axios.delete(
-      `${apiBaseURL}webhooks/0a1014ec-b72c-46df-ae07-f5df65c3ea2c`,
+      `${apiBaseURL}webhooks/4f158c8c-df06-496f-a056-3ab1855ae520`,
       { headers: myHeaders }
     );
     
