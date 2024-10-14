@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { getApiConfig } from './apiConfig';
-import showLuluErrors from './showLuluErrors';
+import showErrors from './showErrors';
 
 const getListOfWebhooks = async () => {
 
@@ -15,7 +15,7 @@ const getListOfWebhooks = async () => {
     console.log(response.data);
     
   } catch (errorData) {
-    console.error(showLuluErrors(errorData));
+    console.error(showErrors(errorData));
   }
 
 };
