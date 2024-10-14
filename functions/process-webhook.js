@@ -13,7 +13,7 @@ exports.handler = async (event) => {
 
         // Process the webhook data as needed
         // For example, handle different event types:
-        if (webhookData.topics.includes("PRINT_JOB_STATUS_CHANGED")) {
+        if (webhookData.topic.includes("PRINT_JOB_STATUS_CHANGED")) {
             // Handle the PRINT_JOB_STATUS_CHANGED event
             console.log('Handling PRINT_JOB_STATUS_CHANGED event...');
             // Add your processing logic here
