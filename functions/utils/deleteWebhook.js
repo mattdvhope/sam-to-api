@@ -12,7 +12,7 @@ const deleteWebhook = async (id) => {
       { headers: myHeaders }
     );
     
-    console.log(response.data);
+    console.log("In Delete webhooks: ", response.data);
 
   } catch (errorData) {
     console.error(showErrors(errorData));
