@@ -4,30 +4,29 @@ import showErrors from './showErrors';
 
 const subscribeToWebhooks = async () => {
 
-
   console.log("handleOrder is invoking subscribeToWebhooks");
   
-  // const { apiBaseURL, myHeaders } = await getApiConfig();
+  const { apiBaseURL, myHeaders } = await getApiConfig();
 
-  // const requestBody = {
-  //   "topics": [
-  //     "PRINT_JOB_STATUS_CHANGED"
-  //   ],
-  //   "url": process.env.GATSBY_URL_THANKYOU process-webhook
-  // };
+  const requestBody = {
+    "topics": [
+      "PRINT_JOB_STATUS_CHANGED"
+    ],
+    "url": process.env.URL_TO_PROCESS_WEBHOOK
+  };
 
-  // try {
-  //   const response = await axios.post(
-  //     `${apiBaseURL}webhooks/`,
-  //     requestBody,
-  //     { headers: myHeaders }
-  //   );
+  try {
+    const response = await axios.post(
+      `${apiBaseURL}webhooks/`,
+      requestBody,
+      { headers: myHeaders }
+    );
     
-  //   console.log(response.data);
+    console.log(response.data);
 
-  // } catch (errorData) {
-  //   console.error(showErrors(errorData));
-  // }
+  } catch (errorData) {
+    console.error(showErrors(errorData));
+  }
 
 };
 
