@@ -12,7 +12,7 @@ const getListOfWebhooks = async () => {
       { headers: myHeaders }
     );
 
-    console.log("List of webhooks: "response.data);
+    console.log("List of webhooks: ", response.data);
     
   } catch (errorData) {
     console.error(showErrors(errorData));
