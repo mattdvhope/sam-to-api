@@ -1,14 +1,21 @@
- // functions/utils/handleOrder.js
+// functions/utils/handleOrder.js
 import buildResponse from './buildResponse';
+import getListOfWebhooks from './getListOfWebhooks'; // Import the new function
 
 const handleOrder = async (event, createPrintJob) => {
     if (event.httpMethod === 'OPTIONS') {
-        return buildResponse(204, {}); // No body needed for OPTIONS
+        return buildResponse(204, {});
     }
 
     try {
         const parsedBody = JSON.parse(event.body);
         const orderSummary = parsedBody.orderSummary;
+
+        const existingWebhooks = await getListOfWebhooks();
+
+        console.log(existingWebhooks);
+
+        // You will add if-else logic here later
 
         await createPrintJob(orderSummary);
 
