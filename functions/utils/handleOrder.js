@@ -1,6 +1,7 @@
 // functions/utils/handleOrder.js
 import buildResponse from './buildResponse';
 import getListOfWebhooks from './getListOfWebhooks';
+import subscribeToWebhooks from './subscribeToWebhooks';
 
 const handleOrder = async (event, createPrintJob) => {
     if (event.httpMethod === 'OPTIONS') {
@@ -13,10 +14,9 @@ const handleOrder = async (event, createPrintJob) => {
 
         const existingWebhooks = await getListOfWebhooks();
 
-        console.log(existingWebhooks);
-
-
-        // You will add if-else logic here later
+        if (existingWebhooks.count === 0) {
+            await subscribeToWebhooks();
+        }
 
         await createPrintJob(orderSummary);
 
