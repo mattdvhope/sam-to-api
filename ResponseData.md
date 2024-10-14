@@ -1,8 +1,8 @@
 INFO   {
-  id: 120412,
+  id: 120412, # Print job ID
   line_items: [ # Two books in this case (for testing)
     {
-      id: 197312,
+      id: 197312, # Line Item ID
       title: 'Test product',
       printable_normalization: [Object],
       status: [Object],
@@ -17,7 +17,7 @@ INFO   {
       pod_package_id: '0600X0900BWSTDLW060UC444GNG'
     },
     {
-      id: 197313,
+      id: 197313, # Line Item ID
       title: 'Test product',
       printable_normalization: [Object],
       status: [Object],

@@ -20,7 +20,7 @@ const createPrintJob = async (orderSummary, books, shippingLevel) => {
             requestBody,
             { headers: myHeaders }
         );
-        console.log(response.data.id);
+        console.log(response.data);
     } catch (errorData) {
         console.error('Error Creating Print Job:', showErrors(errorData));
     }
