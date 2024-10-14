@@ -1,6 +1,7 @@
 // functions/utils/handleOrder.js
 import buildResponse from './buildResponse';
-import getListOfWebhooks from './getListOfWebhooks'; // Import the new function
+import getListOfWebhooks from './getListOfWebhooks';
+import deleteWebhook from './deleteWebhook';
 
 const handleOrder = async (event, createPrintJob) => {
     if (event.httpMethod === 'OPTIONS') {
@@ -12,6 +13,10 @@ const handleOrder = async (event, createPrintJob) => {
         const orderSummary = parsedBody.orderSummary;
 
         const existingWebhooks = await getListOfWebhooks();
+
+        console.log(existingWebhooks);
+
+        await deleteWebhook();
 
         console.log(existingWebhooks);
 
