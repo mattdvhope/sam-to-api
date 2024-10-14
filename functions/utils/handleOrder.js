@@ -1,7 +1,6 @@
 // functions/utils/handleOrder.js
 import buildResponse from './buildResponse';
 import getListOfWebhooks from './getListOfWebhooks';
-import deleteWebhook from './deleteWebhook';
 
 const handleOrder = async (event, createPrintJob) => {
     if (event.httpMethod === 'OPTIONS') {
@@ -16,9 +15,6 @@ const handleOrder = async (event, createPrintJob) => {
 
         console.log(existingWebhooks);
 
-        await deleteWebhook();
-
-        console.log(existingWebhooks);
 
         // You will add if-else logic here later
 
