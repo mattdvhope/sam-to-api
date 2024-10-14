@@ -14,11 +14,11 @@ const handleOrder = async (event, createPrintJob) => {
 
         const existingWebhooks = await getListOfWebhooks();
 
-        console.log("List of webhooks in handle: ", existingWebhooks);
+        // console.log("List of webhooks in handle: ", existingWebhooks);
 
-        // if (existingWebhooks.count === 0) {
-        //     await subscribeToWebhooks();
-        // }
+        if (existingWebhooks.count === 0) {
+            await subscribeToWebhooks();
+        }
 
         await createPrintJob(orderSummary);
 
