@@ -13,8 +13,7 @@ const handleOrder = async (event, createPrintJob) => {
         const orderSummary = parsedBody.orderSummary;
 
         const existingWebhooks = await getListOfWebhooks();
-
-        // console.log("List of webhooks in handle: ", existingWebhooks);
+        console.log("list of existingWebhooks in handleOrder: ", existingWebhooks);
 
         if (existingWebhooks.count === 0) {
             await subscribeToWebhooks();
