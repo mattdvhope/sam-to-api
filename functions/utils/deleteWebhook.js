@@ -2,13 +2,13 @@ import axios from 'axios';
 import { getApiConfig } from './apiConfig';
 import showErrors from './showErrors';
 
-const deleteWebhook = async () => {
+const deleteWebhook = async (id) => {
   
   const { apiBaseURL, myHeaders } = await getApiConfig();
 
   try {
     const response = await axios.delete(
-      `${apiBaseURL}webhooks/4f158c8c-df06-496f-a056-3ab1855ae520`,
+      `${apiBaseURL}webhooks/${id}`,
       { headers: myHeaders }
     );
     
