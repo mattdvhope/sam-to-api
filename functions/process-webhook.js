@@ -16,7 +16,7 @@ const statusActions = {
     },
     SHIPPED: {
         subject: "Your book has been shipped!!",
-        body: "Shipping details are being processed.",
+        body: "Your book will arrive in a little more than a week.",
     },
 };
 
