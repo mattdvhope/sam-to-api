@@ -16,7 +16,14 @@ exports.handler = async (event) => {
         if (webhookData.topic === "PRINT_JOB_STATUS_CHANGED") {
             // Handle the PRINT_JOB_STATUS_CHANGED event
             console.log('Handling PRINT_JOB_STATUS_CHANGED event...');
-            // Add your processing logic here
+        }
+
+        if (webhookData.data.status.name === "IN_PRODUCTION") {
+            console.log("EMAIL!!! > Your book is being printed now!!")
+        }
+
+        if (webhookData.data.status.name === "SHIPPED") {
+            console.log("EMAIL!!! > Your book has been shipped!!")
         }
 
         // Return a success response

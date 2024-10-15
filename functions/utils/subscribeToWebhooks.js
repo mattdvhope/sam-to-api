@@ -4,13 +4,7 @@ import showErrors from './showErrors';
 
 const subscribeToWebhooks = async () => {
 
-  console.log("handleOrder is invoking subscribeToWebhooks");
-  
   const { apiBaseURL, myHeaders } = await getApiConfig();
-
-  console.log("Base URL: ", apiBaseURL);
-  console.log("My Headers: ", myHeaders);
-  console.log("URL to process webhooks: ", process.env.URL_TO_PROCESS_WEBHOOK)
 
   const requestBody = {
     "topics": [
