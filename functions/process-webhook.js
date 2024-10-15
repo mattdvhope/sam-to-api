@@ -18,6 +18,9 @@ exports.handler = async (event) => {
             console.log('Handling PRINT_JOB_STATUS_CHANGED event...');
         }
 
+        console.log("Customer Email: ", webhookData.data.contact_email);
+
+
         if (webhookData.data.status.name === "IN_PRODUCTION") {
             console.log("EMAIL!!! > Your book is being printed now!!")
         }
