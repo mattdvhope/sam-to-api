@@ -2,7 +2,10 @@
 import buildResponse from './utils/buildResponse';
 
 const statusActions = {
-    PRODUCTION_READY: {
+    PRODUCTION_DELAYED: {
+        subject: "Your book is on the docket to be printed!",
+        body: "Your book is about to be printed.",
+    },PRODUCTION_READY: {
         subject: "Printing of book begins soon!!",
         body: "Your book is about to be printed.",
     },
