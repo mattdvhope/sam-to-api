@@ -19,7 +19,7 @@
     payments: [],
     reprints: [],
     line_items: [ [Object] ],
-    external_id: 'PbOrder-20241015T001546854Z-19062128',
+    external_id: '20241015T001546854Z-19062128',
     tax_country: 'US',
     date_created: '2024-10-15T00:15:47.850433Z',
     child_job_ids: [],

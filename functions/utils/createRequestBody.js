@@ -3,7 +3,7 @@ import timestampForOrder from './timestampForOrder';
 
 const createRequestBody = (orderSummary, lineItems, shippingLevel) => ({
     "contact_email": orderSummary.customer.email,
-    "external_id": `PbOrder-${timestampForOrder()}-${orderSummary.id}`, // Ensure you import timestampForOrder
+    "external_id": `${timestampForOrder()}-${orderSummary.id}`, // Ensure you import timestampForOrder
     "line_items": lineItems,
     "production_delay": 120,
     "shipping_address": {
