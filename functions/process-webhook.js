@@ -41,10 +41,30 @@ const emailToMd5 = (email) => {
 };
 
 // Function to add a new subscriber to the Mailchimp audience, or skip if they already exist
-// Function to add a new subscriber to the Mailchimp audience, or skip if they already exist
 const addSubscriberToAudience = async (email, shippingAddress) => {
     const subscriberHash = emailToMd5(email);
     const url = `https://${SERVER_PREFIX}.api.mailchimp.com/3.0/lists/${AUDIENCE_ID}/members/${subscriberHash}`;
+
+    // Prepare the data for adding a new subscriber
+    const cleanedStreet1 = shippingAddress.street1 ? shippingAddress.street1.replace(/\.$/, '') : '';
+    const streetToUse = shippingAddress.suggested_address?.street1 || cleanedStreet1;
+
+    const subscriberData = {
+        email_address: email,
+        status: "subscribed", // or "pending" for double opt-in
+        merge_fields: {
+            FNAME: shippingAddress.name.split(' ')[0] || '', // First name
+            LNAME: shippingAddress.name.split(' ')[1] || '', // Last name
+            ADDRESS: {
+                addr1: streetToUse,
+                addr2: shippingAddress.street2 || '',
+                city: shippingAddress.city || '',
+                state: shippingAddress.state_code || '',
+                zip: shippingAddress.postcode || '',
+                phone: shippingAddress.phone_number || '',
+            },
+        },
+    };
 
     try {
         // First, check if the subscriber already exists in the audience.
@@ -57,48 +77,32 @@ const addSubscriberToAudience = async (email, shippingAddress) => {
 
         if (response.status === 200) {
             console.log(`${email} is already in the audience.`);
+            return; // Exit the function if the subscriber is already in the audience
         }
     } catch (error) {
-        // If the subscriber is not found, a 404 error is returned, meaning they are not in the list yet.
-        if (error.response && error.response.status === 404) {
-            console.log(`${email} not found in the audience. Adding as new subscriber.`);
-
-            // Clean the address and prepare the data
-            const cleanedStreet1 = shippingAddress.street1 ? shippingAddress.street1.replace(/\.$/, '') : '';
-            const streetToUse = shippingAddress.suggested_address?.street1 || cleanedStreet1;
-
-            const addUrl = `https://${SERVER_PREFIX}.api.mailchimp.com/3.0/lists/${AUDIENCE_ID}/members`;
-            const subscriberData = {
-                email_address: email,
-                status: "subscribed", // or "pending" for double opt-in
-                merge_fields: {
-                    FNAME: shippingAddress.name.split(' ')[0] || '', // First name,
-                    LNAME: shippingAddress.name.split(' ')[1] || '', // Last name
-                    ADDRESS: {
-                        addr1: streetToUse,
-                        addr2: shippingAddress.street2 || '',
-                        city: shippingAddress.city || '',
-                        state: shippingAddress.state_code || '',
-                        zip: shippingAddress.postcode || '',
-                        phone: shippingAddress.phone_number || ''
-                    },
-                },
-            };
-
-console.log("Subscriber Data: ", subscriberData);
-
-            await axios.post(addUrl, subscriberData, {
-                headers: {
-                    'Authorization': getAuthHeader(),
-                    'Content-Type': 'application/json',
-                },
-            });
-
-            console.log(`Successfully added ${email} to the audience.`);
-        } else {
-            console.error('Error checking or adding subscriber:', error.message);
-            throw new Error('Failed to add subscriber');
+        // Only proceed if the error is 404, indicating the subscriber is not found
+        if (error.response && error.response.status !== 404) {
+            console.error('Error checking subscriber:', error.message);
+            throw new Error('Failed to check subscriber status');
         }
+    }
+
+    // Attempt to add the new subscriber
+    try {
+        const addUrl = `https://${SERVER_PREFIX}.api.mailchimp.com/3.0/lists/${AUDIENCE_ID}/members`;
+        console.log("Subscriber Data: ", subscriberData);
+
+        await axios.post(addUrl, subscriberData, {
+            headers: {
+                'Authorization': getAuthHeader(),
+                'Content-Type': 'application/json',
+            },
+        });
+
+        console.log(`Successfully added ${email} to the audience.`);
+    } catch (postError) {
+        console.error('Error adding subscriber:', postError.message);
+        throw new Error('Failed to add subscriber');
     }
 };
 
