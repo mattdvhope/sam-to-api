@@ -42,12 +42,12 @@ const emailToMd5 = (email) => {
 
 // Function to add a new subscriber to the Mailchimp audience, or skip if they already exist
 const addSubscriberToAudience = async (email, shippingAddress) => {
-    const subscriberHash = emailToMd5("info@test.com");
+    const subscriberHash = emailToMd5(email);
     const url = `https://${SERVER_PREFIX}.api.mailchimp.com/3.0/lists/${AUDIENCE_ID}/members/${subscriberHash}`;
 
     // Prepare the data for adding a new subscriber
     const subscriberData = {
-        email_address: "info@test.com",
+        email_address: email,
         status: "subscribed", // Set to pending for double opt-in
         merge_fields: {
             FNAME: shippingAddress.name.split(' ')[0] || '', // First name
@@ -62,12 +62,8 @@ const addSubscriberToAudience = async (email, shippingAddress) => {
         },
     };
 
-// console.log(subscriberData);
-
     try {
         // First, check if the subscriber already exists in the audience.
-console.log("URL: ", url);
-
         const response = await axios.get(url, {
             headers: {
                 'Authorization': getAuthHeader(),
