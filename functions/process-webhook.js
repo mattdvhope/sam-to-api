@@ -186,7 +186,7 @@ exports.handler = async (event) => {
             await addSubscriberToAudience(contact_email, shipping_address);
 
             // Send email via Mailchimp
-            await sendMailchimpEmail(contact_email, subject, body); // Uncommented to enable sending email
+            // await sendMailchimpEmail(contact_email, subject, body); // Uncommented to enable sending email
         }
 
         return buildResponse(200, { message: 'Webhook processed successfully' });
