@@ -52,18 +52,18 @@ const addSubscriberToAudience = async (email, shippingAddress) => {
     const subscriberData = {
         email_address: email,
         status: "subscribed", // or "pending" for double opt-in
-        merge_fields: {
-            FNAME: shippingAddress.name.split(' ')[0] || '', // First name
-            LNAME: shippingAddress.name.split(' ')[1] || '', // Last name
-            ADDRESS: {
-                addr1: streetToUse,
-                addr2: shippingAddress.street2 || '',
-                city: shippingAddress.city || '',
-                state: shippingAddress.state_code || '',
-                zip: shippingAddress.postcode || '',
-                phone: shippingAddress.phone_number || '',
-            },
-        },
+        // merge_fields: {
+        //     FNAME: shippingAddress.name.split(' ')[0] || '', // First name
+        //     LNAME: shippingAddress.name.split(' ')[1] || '', // Last name
+        //     ADDRESS: {
+        //         addr1: streetToUse,
+        //         addr2: shippingAddress.street2 || '',
+        //         city: shippingAddress.city || '',
+        //         state: shippingAddress.state_code || '',
+        //         zip: shippingAddress.postcode || '',
+        //         phone: shippingAddress.phone_number || '',
+        //     },
+        // },
     };
 
     try {
