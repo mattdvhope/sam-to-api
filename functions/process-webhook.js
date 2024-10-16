@@ -70,7 +70,7 @@ const addSubscriberToAudience = async (email, shippingAddress) => {
             const addUrl = `https://${SERVER_PREFIX}.api.mailchimp.com/3.0/lists/${AUDIENCE_ID}/members`;
             const subscriberData = {
                 email_address: email,
-                status: "subscribed", // or "pending" for double opt-in
+                status: "pending", // or "pending" for double opt-in
                 merge_fields: {
                     FNAME: shippingAddress.name.split(' ')[0] || '', // First name,
                     LNAME: shippingAddress.name.split(' ')[1] || '', // Last name
