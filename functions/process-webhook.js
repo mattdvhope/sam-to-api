@@ -57,7 +57,7 @@ const addSubscriberToAudience = async (email, shippingAddress) => {
                 city: shippingAddress.city || '',            // City
                 state: shippingAddress.state_code || '',     // State
                 zip: shippingAddress.postcode || '',         // ZIP Code
-                phone: shippingAddress.phone_number || '',
+                phone: shippingAddress.phone_number || '',   // Phone
             },
         },
     };
