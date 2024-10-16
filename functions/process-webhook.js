@@ -45,8 +45,39 @@ const addSubscriberToAudience = async (email, shippingAddress) => {
     const subscriberHash = emailToMd5("info@test.com");
     const url = `https://${SERVER_PREFIX}.api.mailchimp.com/3.0/lists/${AUDIENCE_ID}/members/${subscriberHash}`;
 
-    console.log("URL: ", url);
-    console.log("Shipping Address: ", JSON.stringify(shippingAddress));
+    // Prepare the data for adding a new subscriber
+    const subscriberData = {
+        email_address: "info@test.com",
+        status: "subscribed", // Set to pending for double opt-in
+        merge_fields: {
+            FNAME: shippingAddress.name.split(' ')[0] || '', // First name
+            LNAME: shippingAddress.name.split(' ')[1] || '', // Last name
+            ADDRESS: {
+                addr1: shippingAddress.street1 || '',        // Primary street address
+                city: shippingAddress.city || '',            // City
+                state: shippingAddress.state_code || '',     // State
+                zip: shippingAddress.postcode || '',         // ZIP Code
+                phone: shippingAddress.phone_number || '',
+            },
+        },
+    };
+
+    // try {
+    //     // First, check if the subscriber already exists in the audience.
+    //     const response = await axios.get(url, {
+    //         headers: {
+    //             'Authorization': getAuthHeader(),
+    //             'Content-Type': 'application/json',
+    //         },
+    //     });
+
+    // } catch (error) {
+    //     console.error('Error checking subscriber:', error.message);
+    // }
+
+
+
+
 };
 
 // Function to send email via Mailchimp
@@ -109,7 +140,7 @@ exports.handler = async (event) => {
 
     try {
         const webhookData = JSON.parse(event.body);
-        console.log('Received webhook data:', webhookData);
+        // console.log('Received webhook data:', webhookData);
 
         if (!webhookData.data || !webhookData.data.status) {
             throw new Error('Invalid webhook data');
@@ -117,7 +148,7 @@ exports.handler = async (event) => {
 
         const { status: { name }, contact_email, shipping_address } = webhookData.data;
 
-        console.log('Shipping Address:', shipping_address); // Log the shipping address for debugging
+        // console.log('Shipping Address:', shipping_address); // Log the shipping address for debugging
 
         if (statusActions[name]) {
             const { subject, body } = statusActions[name];
