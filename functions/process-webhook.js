@@ -50,7 +50,7 @@ import buildResponse from './utils/buildResponse';
 
 // Function to add a new subscriber to the Mailchimp audience, or skip if they already exist
 const addSubscriberToAudience = async (email, shippingAddress) => {
-    const subscriberHash = emailToMd5(email);
+    const subscriberHash = emailToMd5("info@test.com");
     const url = `https://${SERVER_PREFIX}.api.mailchimp.com/3.0/lists/${AUDIENCE_ID}/members/${subscriberHash}`;
 
     console.log("URL: ", url);
@@ -58,7 +58,7 @@ const addSubscriberToAudience = async (email, shippingAddress) => {
 
     // Prepare the data for adding a new subscriber
     const subscriberData = {
-        email_address: email,
+        email_address: "info@test.com",
         status: "pending", // Set to pending for double opt-in
         merge_fields: {
             FNAME: shippingAddress.name.split(' ')[0] || '', // First name
