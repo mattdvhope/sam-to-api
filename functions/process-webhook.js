@@ -46,25 +46,21 @@ const addSubscriberToAudience = async (email, shippingAddress) => {
     const url = `https://${SERVER_PREFIX}.api.mailchimp.com/3.0/lists/${AUDIENCE_ID}/members/${subscriberHash}`;
 
     console.log("URL: ", url);
-    console.log("Shipping Address: ", JSON.stringify(shippingAddress)); // Fixed missing closing parenthesis
+    console.log("Shipping Address: ", JSON.stringify(shippingAddress));
 
     // Prepare the data for adding a new subscriber
-    const cleanedStreet1 = shippingAddress.street1 ? shippingAddress.street1.replace(/\.$/, '') : '';
-    const streetToUse = shippingAddress.suggested_address?.street1 || cleanedStreet1;
-
     const subscriberData = {
         email_address: email,
-        status: "subscribed", // or "pending" for double opt-in
+        status: "pending", // Set to pending for double opt-in
         merge_fields: {
             FNAME: shippingAddress.name.split(' ')[0] || '', // First name
             LNAME: shippingAddress.name.split(' ')[1] || '', // Last name
+            BIRTHDAY: shippingAddress.birthday || '',         // Birthday (if available)
             ADDRESS: {
-                addr1: streetToUse,
-                addr2: shippingAddress.street2 || '',
-                city: shippingAddress.city || '',
-                state: shippingAddress.state_code || '',
-                zip: shippingAddress.postcode || '',
-                phone: shippingAddress.phone_number || '',
+                addr1: shippingAddress.street1 || '',        // Primary street address
+                city: shippingAddress.city || '',            // City
+                state: shippingAddress.state_code || '',     // State
+                zip: shippingAddress.postcode || '',         // ZIP Code
             },
         },
     };
