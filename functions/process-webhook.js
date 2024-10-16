@@ -71,7 +71,7 @@ const addSubscriberToAudience = async (email, shippingAddress) => {
             },
         });
 
-        console.log("Response: ", response);
+        console.log("Response Data: ", response.data);
 
     } catch (error) {
         console.error('Error checking subscriber:', error.message);
