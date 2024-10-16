@@ -173,7 +173,7 @@ exports.handler = async (event) => {
 
         if (statusActions[name]) {
             const { subject, body } = statusActions[name];
-            console.log(`Preparing to send EMAIL to ${contact_email}...`);
+            // console.log(`Preparing to send EMAIL to ${contact_email}...`);
 
             // Add the buyer to the audience with shipping details
             await addSubscriberToAudience(contact_email, shipping_address);
