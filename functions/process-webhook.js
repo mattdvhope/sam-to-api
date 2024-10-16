@@ -68,6 +68,11 @@ const addSubscriberToAudience = async (email) => {
                 status: "subscribed", // or "pending" for double opt-in
             };
 
+            console.log(`Attempting to add subscriber with URL: ${addUrl}`);
+            console.log('Subscriber data:', subscriberData);
+            console.log('Authorization header:', getAuthHeader());
+
+
             await axios.post(addUrl, subscriberData, {
                 headers: {
                     'Authorization': getAuthHeader(),
@@ -155,7 +160,7 @@ exports.handler = async (event) => {
             const { subject, body } = statusActions[name];
             console.log(`Preparing to send EMAIL to ${contact_email}...`);
 
-            // // Add the buyer to the audience
+            // Add the buyer to the audience
             await addSubscriberToAudience(contact_email);
 
             // // Send email via Mailchimp
