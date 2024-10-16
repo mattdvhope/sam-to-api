@@ -41,24 +41,13 @@ const emailToMd5 = (email) => {
 };
 
 // Function to add a new subscriber to the Mailchimp audience, or skip if they already exist
-// functions/process-webhook.js
-import axios from 'axios';
-import crypto from 'crypto';
-import buildResponse from './utils/buildResponse';
-
-// (existing code)...
-
-// Function to add a new subscriber to the Mailchimp audience, or skip if they already exist
 const addSubscriberToAudience = async (email, shippingAddress) => {
     const subscriberHash = emailToMd5("info@test.com");
     const url = `https://${SERVER_PREFIX}.api.mailchimp.com/3.0/lists/${AUDIENCE_ID}/members/${subscriberHash}`;
 
     console.log("URL: ", url);
     console.log("Shipping Address: ", JSON.stringify(shippingAddress));
-
-
 };
-
 
 // Function to send email via Mailchimp
 const sendMailchimpEmail = async (email, subject, body) => {
