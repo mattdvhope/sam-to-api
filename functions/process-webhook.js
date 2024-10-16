@@ -127,8 +127,8 @@ const sendMailchimpEmail = async (email, subject, body) => {
         settings: {
             subject_line: subject,
             title: subject,
-            from_name: "Your Company",
-            reply_to: "your-email@gmail.com",
+            from_name: "SOAW Publishing Company",
+            reply_to: "soaw4life@gmail.com",
         },
     };
 
@@ -161,8 +161,10 @@ const sendMailchimpEmail = async (email, subject, body) => {
                 'Content-Type': 'application/json',
             },
         });
-    } catch (error) {
-        console.error('Error sending email via Mailchimp:', error.message);
+    } catch (postError) {
+        console.error('Error sending email via/from Mailchimp:', postError.message);
+        console.error(postError.response.status);
+        console.error(postError.response.data);
         throw new Error('Failed to send email');
     }
 };
@@ -192,7 +194,7 @@ exports.handler = async (event) => {
             await addSubscriberToAudience(contact_email, shipping_address);
 
             // Send email via Mailchimp
-            // await sendMailchimpEmail(contact_email, subject, body); // Uncommented to enable sending email
+            await sendMailchimpEmail(contact_email, subject, body); // Uncommented to enable sending email
         }
 
         return buildResponse(200, { message: 'Webhook processed successfully' });
