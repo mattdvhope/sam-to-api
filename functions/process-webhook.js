@@ -75,7 +75,7 @@ console.log(subscriberData);
 
     // } catch (error) {
     //     console.error('Error checking subscriber:', error.message);
-    // }
+    // } 
 
 };
 
