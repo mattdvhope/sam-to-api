@@ -78,11 +78,15 @@ const addSubscriberToAudience = async (email, shippingAddress) => {
 
     } catch (error) {
         // Only proceed if the error is 404, indicating the subscriber is not found
-        if (error.response && error.response.status !== 404) {
+        if (error.response && error.response.status === 404) {
+            // Proceed normally as this means the subscriber is not found
+            console.log('Subscriber not found, proceeding to add them.');
+        } else {
             console.error('Error checking subscriber:', error.message);
             throw new Error('Failed to check subscriber status');
         }
-    } 
+    }
+
 
 }; // addSubscriberToAudience
 
