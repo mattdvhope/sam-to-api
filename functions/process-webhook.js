@@ -71,7 +71,10 @@ const addSubscriberToAudience = async (email, shippingAddress) => {
             },
         });
 
-        console.log("Response Data: ", response.data);
+        if (response.status === 200) {
+            console.log(`${email} is already in the audience.`);
+            return; // Exit the function if the subscriber is already in the audience
+        }
 
     } catch (error) {
         console.error('Error checking subscriber:', error.message);
