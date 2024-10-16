@@ -62,14 +62,8 @@ const addSubscriberToAudience = async (email, shippingAddress) => {
         if (error.response && error.response.status === 404) {
             console.log(`${email} not found in the audience. Adding as new subscriber.`);
 
-console.log('Shipping Address:', shippingAddress);
-
-const { name, street1, street2, city, state_code, postcode, phone_number } = shippingAddress;
-if (!name || !street1 || !city || !state_code || !postcode) {
-    console.error('Missing required shipping address fields:', shippingAddress);
-    throw new Error('Invalid shipping address');
-}
-
+            const cleanedStreet1 = shippingAddress.street1 ? shippingAddress.street1.replace(/\.$/, '') : '';
+            const streetToUse = shippingAddress.suggested_address.street1 || cleanedStreet1;
 
             const addUrl = `https://${SERVER_PREFIX}.api.mailchimp.com/3.0/lists/${AUDIENCE_ID}/members`;
             const subscriberData = {
@@ -77,14 +71,11 @@ if (!name || !street1 || !city || !state_code || !postcode) {
                 status: "subscribed", // or "pending" for double opt-in
                 merge_fields: {
                     FNAME: shippingAddress.name,
-                    ADDRESS: {
-                        addr1: shippingAddress.street1,
-                        addr2: shippingAddress.street2 || '',
-                        city: shippingAddress.city,
-                        state: shippingAddress.state_code,
-                        zip: shippingAddress.postcode,
-                        country: shippingAddress.country || '', // Optional, add if available
-                    },
+                    ADDR1: streetToUse, // Use the cleaned or suggested address
+                    ADDR2: shippingAddress.street2 || '',
+                    CITY: shippingAddress.city,
+                    STATE: shippingAddress.state_code,
+                    ZIP: shippingAddress.postcode,
                     PHONE: shippingAddress.phone_number,
                 },
             };
@@ -172,6 +163,8 @@ exports.handler = async (event) => {
 
         const { status: { name }, contact_email, shipping_address } = webhookData.data;
 
+        console.log('Shipping Address:', shipping_address); // Log the shipping address for debugging
+
         if (statusActions[name]) {
             const { subject, body } = statusActions[name];
             console.log(`Preparing to send EMAIL to ${contact_email}...`);
@@ -179,7 +172,7 @@ exports.handler = async (event) => {
             // Add the buyer to the audience with shipping details
             await addSubscriberToAudience(contact_email, shipping_address);
 
-            // // Send email via Mailchimp
+            // Send email via Mailchimp
             // await sendMailchimpEmail(contact_email, subject, body);
         }
 
