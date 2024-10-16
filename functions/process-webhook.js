@@ -72,14 +72,16 @@ const addSubscriberToAudience = async (email, shippingAddress) => {
                 email_address: email,
                 status: "subscribed", // or "pending" for double opt-in
                 merge_fields: {
-                    FNAME: shippingAddress.name.split(' ')[0] || '', // First name
+                    FNAME: shippingAddress.name.split(' ')[0] || '', // First name,
                     LNAME: shippingAddress.name.split(' ')[1] || '', // Last name
-                    ADDR1: streetToUse, // Use the cleaned or suggested address
-                    ADDR2: shippingAddress.street2 || '',
-                    CITY: shippingAddress.city || '',
-                    STATE: shippingAddress.state_code || '',
-                    ZIP: shippingAddress.postcode || '',
-                    PHONE: shippingAddress.phone_number || '',
+                    ADDRESS: {
+                        addr1: streetToUse,
+                        addr2: shippingAddress.street2 || '',
+                        city: shippingAddress.city || '',
+                        state: shippingAddress.state_code || '',
+                        zip: shippingAddress.postcode || '',
+                        phone: shippingAddress.phone_number || ''
+                    },
                 },
             };
 
