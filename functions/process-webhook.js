@@ -193,8 +193,10 @@ exports.handler = async (event) => {
         if (statusActions[name]) {
             const { subject, body } = statusActions[name];
 
+
+console.log(contact_email);
             // Add the buyer to the audience with shipping details
-            await addSubscriberToAudience(contact_email, shipping_address);
+            // await addSubscriberToAudience(contact_email, shipping_address);
 
             // Send email via Mailchimp
             // await sendMailchimpEmail(contact_email, subject, body); // Uncommented to enable sending email
