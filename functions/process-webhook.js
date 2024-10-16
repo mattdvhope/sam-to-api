@@ -42,12 +42,12 @@ const emailToMd5 = (email) => {
 
 // Function to add a new subscriber to the Mailchimp audience, or skip if they already exist
 const addSubscriberToAudience = async (email, shippingAddress) => {
-    const subscriberHash = emailToMd5(email);
+    const subscriberHash = emailToMd5("info@test.com");
     const url = `https://${SERVER_PREFIX}.api.mailchimp.com/3.0/lists/${AUDIENCE_ID}/members/${subscriberHash}`;
 
     // Prepare the data for adding a new subscriber
     const subscriberData = {
-        email_address: email,
+        email_address: "info@test.com",
         status: "subscribed", // Set to pending for double opt-in
         merge_fields: {
             FNAME: shippingAddress.name.split(' ')[0] || '', // First name
@@ -77,10 +77,15 @@ const addSubscriberToAudience = async (email, shippingAddress) => {
         }
 
     } catch (error) {
-        console.error('Error checking subscriber:', error.message);
+        // Only proceed if the error is 404, indicating the subscriber is not found
+        if (error.response && error.response.status !== 404) {
+            console.error('Error checking subscriber:', error.message);
+            throw new Error('Failed to check subscriber status');
+        }
     } 
 
-};
+}; // addSubscriberToAudience
+
 
 // Function to send email via Mailchimp
 const sendMailchimpEmail = async (email, subject, body) => {
