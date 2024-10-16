@@ -62,6 +62,15 @@ const addSubscriberToAudience = async (email, shippingAddress) => {
         if (error.response && error.response.status === 404) {
             console.log(`${email} not found in the audience. Adding as new subscriber.`);
 
+console.log('Shipping Address:', shippingAddress);
+
+const { name, street1, street2, city, state_code, postcode, phone_number } = shippingAddress;
+if (!name || !street1 || !city || !state_code || !postcode) {
+    console.error('Missing required shipping address fields:', shippingAddress);
+    throw new Error('Invalid shipping address');
+}
+
+
             const addUrl = `https://${SERVER_PREFIX}.api.mailchimp.com/3.0/lists/${AUDIENCE_ID}/members`;
             const subscriberData = {
                 email_address: email,
