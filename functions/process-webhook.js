@@ -26,7 +26,7 @@ const statusActions = {
 // Mailchimp API information
 const MAIL_SVC_API_KEY = process.env.MC_SM_LL_WEBH_KEY;
 const SERVER_PREFIX = process.env.MC_K_SUFFIX;
-const AUDIENCE_ID = process.env.MC_A_ID;
+const AUDIENCE_ID = process.env.MC_AUD_ID;
 const USER_NAME = process.env.MC_USERNAME;
 
 // Helper function to get the base64-encoded Authorization header
