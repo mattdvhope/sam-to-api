@@ -156,7 +156,7 @@ exports.handler = async (event) => {
             console.log(`Preparing to send EMAIL to ${contact_email}...`);
 
             // // Add the buyer to the audience
-            // await addSubscriberToAudience(contact_email);
+            await addSubscriberToAudience(contact_email);
 
             // // Send email via Mailchimp
             // await sendMailchimpEmail(contact_email, subject, body);
