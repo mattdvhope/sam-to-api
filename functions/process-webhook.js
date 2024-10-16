@@ -41,7 +41,7 @@ const emailToMd5 = (email) => {
 };
 
 // Function to add a new subscriber to the Mailchimp audience, or skip if they already exist
-const addSubscriberToAudience = async (email) => {
+const addSubscriberToAudience = async (email, shippingAddress) => {
     const subscriberHash = emailToMd5(email);
     const url = `https://${SERVER_PREFIX}.api.mailchimp.com/3.0/lists/${AUDIENCE_ID}/members/${subscriberHash}`;
 
@@ -66,12 +66,16 @@ const addSubscriberToAudience = async (email) => {
             const subscriberData = {
                 email_address: email,
                 status: "subscribed", // or "pending" for double opt-in
+                merge_fields: {
+                    FNAME: shippingAddress.name,
+                    ADDR1: shippingAddress.street1,
+                    ADDR2: shippingAddress.street2 || '',
+                    CITY: shippingAddress.city,
+                    STATE: shippingAddress.state_code,
+                    ZIP: shippingAddress.postcode,
+                    PHONE: shippingAddress.phone_number,
+                },
             };
-
-            console.log(`Attempting to add subscriber with URL: ${addUrl}`);
-            console.log('Subscriber data:', subscriberData);
-            console.log('Authorization header:', getAuthHeader());
-
 
             await axios.post(addUrl, subscriberData, {
                 headers: {
@@ -154,14 +158,14 @@ exports.handler = async (event) => {
             throw new Error('Invalid webhook data');
         }
 
-        const { status: { name }, contact_email } = webhookData.data;
+        const { status: { name }, contact_email, shipping_address } = webhookData.data;
 
         if (statusActions[name]) {
             const { subject, body } = statusActions[name];
             console.log(`Preparing to send EMAIL to ${contact_email}...`);
 
-            // Add the buyer to the audience
-            await addSubscriberToAudience(contact_email);
+            // Add the buyer to the audience with shipping details
+            await addSubscriberToAudience(contact_email, shipping_address);
 
             // // Send email via Mailchimp
             // await sendMailchimpEmail(contact_email, subject, body);
