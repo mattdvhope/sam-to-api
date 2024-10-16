@@ -155,11 +155,15 @@ exports.handler = async (event) => {
             const { subject, body } = statusActions[name];
             console.log(`Preparing to send EMAIL to ${contact_email}...`);
 
+
+console.log(contact_email);
+
+
             // Add the buyer to the audience
-            await addSubscriberToAudience(contact_email);
+            // await addSubscriberToAudience(contact_email);
 
             // Send email via Mailchimp
-            await sendMailchimpEmail(contact_email, subject, body);
+            // await sendMailchimpEmail(contact_email, subject, body);
         }
 
         return buildResponse(200, { message: 'Webhook processed successfully' });
