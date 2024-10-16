@@ -41,6 +41,14 @@ const emailToMd5 = (email) => {
 };
 
 // Function to add a new subscriber to the Mailchimp audience, or skip if they already exist
+// functions/process-webhook.js
+import axios from 'axios';
+import crypto from 'crypto';
+import buildResponse from './utils/buildResponse';
+
+// (existing code)...
+
+// Function to add a new subscriber to the Mailchimp audience, or skip if they already exist
 const addSubscriberToAudience = async (email, shippingAddress) => {
     const subscriberHash = emailToMd5(email);
     const url = `https://${SERVER_PREFIX}.api.mailchimp.com/3.0/lists/${AUDIENCE_ID}/members/${subscriberHash}`;
@@ -100,10 +108,17 @@ const addSubscriberToAudience = async (email, shippingAddress) => {
 
         console.log(`Successfully added ${email} to the audience.`);
     } catch (postError) {
-        console.error('Error adding subscriber:', postError.message);
+        if (postError.response) {
+            // Log the detailed error information from Mailchimp
+            console.error('Error adding subscriber:', postError.response.status, postError.response.data);
+        } else {
+            // Log general error message
+            console.error('General Error adding subscriber:', postError.message);
+        }
         throw new Error('Failed to add subscriber');
     }
 };
+
 
 // Function to send email via Mailchimp
 const sendMailchimpEmail = async (email, subject, body) => {
