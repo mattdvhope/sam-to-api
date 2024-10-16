@@ -87,6 +87,30 @@ const addSubscriberToAudience = async (email, shippingAddress) => {
         }
     }
 
+    // Attempt to add the new subscriber
+    try {
+        const addUrl = `https://${SERVER_PREFIX}.api.mailchimp.com/3.0/lists/${AUDIENCE_ID}/members`;
+        console.log("Subscriber Data: ", subscriberData);
+
+        await axios.post(addUrl, subscriberData, {
+            headers: {
+                'Authorization': getAuthHeader(),
+                'Content-Type': 'application/json',
+            },
+        });
+
+        console.log(`Successfully added ${email} to the audience.`);
+    } catch (postError) {
+        if (postError.response) {
+            // Log the detailed error information from Mailchimp
+            console.error('Error adding subscriber:', postError.response.status, postError.response.data);
+        } else {
+            // Log general error message
+            console.error('General Error adding subscriber:', postError.message);
+        }
+        throw new Error('Failed to add subscriber');
+    }
+
 
 }; // addSubscriberToAudience
 
