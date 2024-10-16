@@ -45,31 +45,28 @@ const addSubscriberToAudience = async (email, shippingAddress) => {
     const subscriberHash = emailToMd5(email);
     const url = `https://${SERVER_PREFIX}.api.mailchimp.com/3.0/lists/${AUDIENCE_ID}/members/${subscriberHash}`;
 
-console.log("URL: ", url);
-console.log("Shipping Address: ", JSON.stringify(shippingAddress);
+    console.log("URL: ", url);
+    console.log("Shipping Address: ", JSON.stringify(shippingAddress)); // Fixed missing closing parenthesis
+
     // Prepare the data for adding a new subscriber
-    // const cleanedStreet1 = shippingAddress.street1 ? shippingAddress.street1.replace(/\.$/, '') : '';
-    // const streetToUse = shippingAddress.suggested_address?.street1 || cleanedStreet1;
-
-
-
-
+    const cleanedStreet1 = shippingAddress.street1 ? shippingAddress.street1.replace(/\.$/, '') : '';
+    const streetToUse = shippingAddress.suggested_address?.street1 || cleanedStreet1;
 
     const subscriberData = {
         email_address: email,
         status: "subscribed", // or "pending" for double opt-in
-        // merge_fields: {
-        //     FNAME: shippingAddress.name.split(' ')[0] || '', // First name
-        //     LNAME: shippingAddress.name.split(' ')[1] || '', // Last name
-        //     ADDRESS: {
-        //         addr1: streetToUse,
-        //         addr2: shippingAddress.street2 || '',
-        //         city: shippingAddress.city || '',
-        //         state: shippingAddress.state_code || '',
-        //         zip: shippingAddress.postcode || '',
-        //         phone: shippingAddress.phone_number || '',
-        //     },
-        // },
+        merge_fields: {
+            FNAME: shippingAddress.name.split(' ')[0] || '', // First name
+            LNAME: shippingAddress.name.split(' ')[1] || '', // Last name
+            ADDRESS: {
+                addr1: streetToUse,
+                addr2: shippingAddress.street2 || '',
+                city: shippingAddress.city || '',
+                state: shippingAddress.state_code || '',
+                zip: shippingAddress.postcode || '',
+                phone: shippingAddress.phone_number || '',
+            },
+        },
     };
 
     try {
@@ -84,7 +81,7 @@ console.log("Shipping Address: ", JSON.stringify(shippingAddress);
         if (response.status === 200) {
             console.log(`${email} is already in the audience.`);
             return; // Exit the function if the subscriber is already in the audience
-        } 
+        }
     } catch (error) {
         // Only proceed if the error is 404, indicating the subscriber is not found
         if (error.response && error.response.status !== 404) {
@@ -111,7 +108,6 @@ console.log("Shipping Address: ", JSON.stringify(shippingAddress);
         throw new Error('Failed to add subscriber');
     }
 };
-
 
 // Function to send email via Mailchimp
 const sendMailchimpEmail = async (email, subject, body) => {
@@ -185,13 +181,12 @@ exports.handler = async (event) => {
 
         if (statusActions[name]) {
             const { subject, body } = statusActions[name];
-            // console.log(`Preparing to send EMAIL to ${contact_email}...`);
 
             // Add the buyer to the audience with shipping details
             await addSubscriberToAudience(contact_email, shipping_address);
 
             // Send email via Mailchimp
-            // await sendMailchimpEmail(contact_email, subject, body);
+            await sendMailchimpEmail(contact_email, subject, body); // Uncommented to enable sending email
         }
 
         return buildResponse(200, { message: 'Webhook processed successfully' });
