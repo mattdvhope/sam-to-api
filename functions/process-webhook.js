@@ -62,20 +62,24 @@ const addSubscriberToAudience = async (email, shippingAddress) => {
         },
     };
 
-console.log(subscriberData);
+// console.log(subscriberData);
 
-    // try {
-    //     // First, check if the subscriber already exists in the audience.
-    //     const response = await axios.get(url, {
-    //         headers: {
-    //             'Authorization': getAuthHeader(),
-    //             'Content-Type': 'application/json',
-    //         },
-    //     });
+    try {
+        // First, check if the subscriber already exists in the audience.
+console.log("URL: ", url);
 
-    // } catch (error) {
-    //     console.error('Error checking subscriber:', error.message);
-    // } 
+        const response = await axios.get(url, {
+            headers: {
+                'Authorization': getAuthHeader(),
+                'Content-Type': 'application/json',
+            },
+        });
+
+        console.log("Response: ", response);
+
+    } catch (error) {
+        console.error('Error checking subscriber:', error.message);
+    } 
 
 };
 
