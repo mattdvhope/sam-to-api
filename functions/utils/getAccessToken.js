@@ -10,8 +10,8 @@ const getAccessToken = async () => {
   });
 
   const headers = {
+    'Content-Type': process.env.SAM_CONTENT_TYPE,
     'Authorization': `Basic ${process.env.SAM_SANDBOX_ENCODED}`,
-    'Authorization': `${process.env.SAM_SANDBOX_ENCODED}`,
   };
 
   try {
