@@ -41,6 +41,7 @@ const emailToMd5 = (email) => {
 };
 
 // Function to add a new subscriber to the Mailchimp audience, or skip if they already exist
+// Function to add a new subscriber to the Mailchimp audience, or skip if they already exist
 const addSubscriberToAudience = async (email, shippingAddress) => {
     const subscriberHash = emailToMd5(email);
     const url = `https://${SERVER_PREFIX}.api.mailchimp.com/3.0/lists/${AUDIENCE_ID}/members/${subscriberHash}`;
@@ -62,21 +63,23 @@ const addSubscriberToAudience = async (email, shippingAddress) => {
         if (error.response && error.response.status === 404) {
             console.log(`${email} not found in the audience. Adding as new subscriber.`);
 
+            // Clean the address and prepare the data
             const cleanedStreet1 = shippingAddress.street1 ? shippingAddress.street1.replace(/\.$/, '') : '';
-            const streetToUse = shippingAddress.suggested_address.street1 || cleanedStreet1;
+            const streetToUse = shippingAddress.suggested_address?.street1 || cleanedStreet1;
 
             const addUrl = `https://${SERVER_PREFIX}.api.mailchimp.com/3.0/lists/${AUDIENCE_ID}/members`;
             const subscriberData = {
                 email_address: email,
                 status: "subscribed", // or "pending" for double opt-in
                 merge_fields: {
-                    FNAME: shippingAddress.name,
+                    FNAME: shippingAddress.name.split(' ')[0] || '', // First name
+                    LNAME: shippingAddress.name.split(' ')[1] || '', // Last name
                     ADDR1: streetToUse, // Use the cleaned or suggested address
                     ADDR2: shippingAddress.street2 || '',
-                    CITY: shippingAddress.city,
-                    STATE: shippingAddress.state_code,
-                    ZIP: shippingAddress.postcode,
-                    PHONE: shippingAddress.phone_number,
+                    CITY: shippingAddress.city || '',
+                    STATE: shippingAddress.state_code || '',
+                    ZIP: shippingAddress.postcode || '',
+                    PHONE: shippingAddress.phone_number || '',
                 },
             };
 
@@ -94,6 +97,7 @@ const addSubscriberToAudience = async (email, shippingAddress) => {
         }
     }
 };
+
 
 // Function to send email via Mailchimp
 const sendMailchimpEmail = async (email, subject, body) => {
