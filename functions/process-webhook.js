@@ -45,19 +45,19 @@ const addSubscriberToAudience = async (email, shippingAddress) => {
     const subscriberHash = emailToMd5(email);
     const url = `https://${SERVER_PREFIX}.api.mailchimp.com/3.0/lists/${AUDIENCE_ID}/members/${subscriberHash}`;
 
-    // Prepare the data for adding a new subscriber
+    // Prepare the data for adding or updating a subscriber
     const subscriberData = {
         email_address: email,
-        status: "subscribed", // Set to pending for double opt-in
+        status: "subscribed",
         merge_fields: {
             FNAME: shippingAddress.name.split(' ')[0] || '', // First name
             LNAME: shippingAddress.name.split(' ')[1] || '', // Last name
             ADDRESS: `${shippingAddress.street1}, ${shippingAddress.street2}, ${shippingAddress.city}, ${shippingAddress.state_code} ${shippingAddress.postcode}`,
-            PHONE: shippingAddress.phone_number || '',   // If PHONE field exists in Mailchimp
+            PHONE: shippingAddress.phone_number || '', // If PHONE field exists in Mailchimp
         },
     };
 
-console.log(subscriberData);
+    console.log(subscriberData);
 
     try {
         // First, check if the subscriber already exists in the audience.
@@ -70,13 +70,25 @@ console.log(subscriberData);
 
         if (response.status === 200) {
             console.log(`${email} is already in the audience.`);
-            return; // Exit the function if the subscriber is already in the audience
-        }
+            
+            // Update the existing subscriber with new address and phone number
+            const updateResponse = await axios.patch(url, { merge_fields: subscriberData.merge_fields }, {
+                headers: {
+                    'Authorization': getAuthHeader(),
+                    'Content-Type': 'application/json',
+                },
+            });
 
+            if (updateResponse.status === 200) {
+                console.log(`Updated contact info for ${email}`);
+            } else {
+                console.log(`Failed to update contact info for ${email}:`, updateResponse.status);
+            }
+            return; // Exit the function after updating the subscriber
+        }
     } catch (error) {
         // Only proceed if the error is 404, indicating the subscriber is not found
         if (error.response && error.response.status === 404) {
-            // Proceed normally as this means the subscriber is not found
             console.log('Subscriber not found, proceeding to add them.');
         } else {
             console.error('Error checking subscriber:', error.message);
@@ -99,16 +111,12 @@ console.log(subscriberData);
         console.log(`Successfully added ${email} to the audience.`);
     } catch (postError) {
         if (postError.response) {
-            // Log the detailed error information from Mailchimp
             console.error('Error adding subscriber:', postError.response.status, postError.response.data);
         } else {
-            // Log general error message
             console.error('General Error adding subscriber:', postError.message);
         }
         throw new Error('Failed to add subscriber');
     }
-
-
 }; // addSubscriberToAudience
 
 
