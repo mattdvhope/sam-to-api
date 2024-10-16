@@ -62,6 +62,8 @@ const addSubscriberToAudience = async (email, shippingAddress) => {
         },
     };
 
+console.log(subscriberData);
+
     // try {
     //     // First, check if the subscriber already exists in the audience.
     //     const response = await axios.get(url, {
@@ -74,9 +76,6 @@ const addSubscriberToAudience = async (email, shippingAddress) => {
     // } catch (error) {
     //     console.error('Error checking subscriber:', error.message);
     // }
-
-
-
 
 };
 
