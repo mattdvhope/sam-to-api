@@ -41,14 +41,19 @@ const emailToMd5 = (email) => {
 };
 
 // Function to add a new subscriber to the Mailchimp audience, or skip if they already exist
-// const addSubscriberToAudience = async (email, shippingAddress) => {
-const addSubscriberToAudience = async (email) => {
+const addSubscriberToAudience = async (email, shippingAddress) => {
     const subscriberHash = emailToMd5(email);
     const url = `https://${SERVER_PREFIX}.api.mailchimp.com/3.0/lists/${AUDIENCE_ID}/members/${subscriberHash}`;
 
+console.log("URL: ", url);
+console.log("Shipping Address: ", JSON.stringify(shippingAddress);
     // Prepare the data for adding a new subscriber
     // const cleanedStreet1 = shippingAddress.street1 ? shippingAddress.street1.replace(/\.$/, '') : '';
     // const streetToUse = shippingAddress.suggested_address?.street1 || cleanedStreet1;
+
+
+
+
 
     const subscriberData = {
         email_address: email,
@@ -79,7 +84,7 @@ const addSubscriberToAudience = async (email) => {
         if (response.status === 200) {
             console.log(`${email} is already in the audience.`);
             return; // Exit the function if the subscriber is already in the audience
-        }
+        } 
     } catch (error) {
         // Only proceed if the error is 404, indicating the subscriber is not found
         if (error.response && error.response.status !== 404) {
@@ -183,8 +188,7 @@ exports.handler = async (event) => {
             // console.log(`Preparing to send EMAIL to ${contact_email}...`);
 
             // Add the buyer to the audience with shipping details
-            // await addSubscriberToAudience(contact_email, shipping_address);
-            await addSubscriberToAudience(contact_email);
+            await addSubscriberToAudience(contact_email, shipping_address);
 
             // Send email via Mailchimp
             // await sendMailchimpEmail(contact_email, subject, body);
