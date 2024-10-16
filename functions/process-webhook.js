@@ -52,13 +52,8 @@ const addSubscriberToAudience = async (email, shippingAddress) => {
         merge_fields: {
             FNAME: shippingAddress.name.split(' ')[0] || '', // First name
             LNAME: shippingAddress.name.split(' ')[1] || '', // Last name
-            ADDRESS: {
-                addr1: shippingAddress.street1 || '',        // Primary street address
-                city: shippingAddress.city || '',            // City
-                state: shippingAddress.state_code || '',     // State
-                zip: shippingAddress.postcode || '',         // ZIP Code
-                phone: shippingAddress.phone_number || '',   // Phone
-            },
+            ADDRESS: `${shippingAddress.street1}, ${shippingAddress.street2}, ${shippingAddress.city}, ${shippingAddress.state_code} ${shippingAddress.postcode}`,
+            PHONE: shippingAddress.phone_number || '',   // If PHONE field exists in Mailchimp
         },
     };
 
