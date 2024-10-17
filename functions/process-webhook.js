@@ -50,7 +50,7 @@ const sendEmail = async (email, subject, body) => {
     }
 };
 
-// Main handler for the webhook
+// Main handler for the webhook 
 exports.handler = async (event) => {
     if (event.httpMethod !== 'POST') {
         return buildResponse(405, { message: 'Method Not Allowedddd' });
