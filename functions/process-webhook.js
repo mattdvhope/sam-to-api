@@ -1,27 +1,7 @@
 // functions/process-webhook.js
 import axios from 'axios';
 import crypto from 'crypto';
-import buildResponse from './utils/buildResponse';
-
-// Define status actions for different order statuses
-const statusActions = {
-    PRODUCTION_DELAYED: {
-        subject: "Your book is on the docket to be printed!",
-        body: "Your book will be printed later.",
-    },
-    PRODUCTION_READY: {
-        subject: "Printing of book begins soon!!",
-        body: "Your book is about to be printed.",
-    },
-    IN_PRODUCTION: {
-        subject: "Your book is being printed now!!",
-        body: "Production is underway.",
-    },
-    SHIPPED: {
-        subject: "Your book has been shipped!!",
-        body: "Your book will arrive in a little more than a week.",
-    },
-};
+import buildResponse from './utils/buildResponse'; // Import buildResponse
 
 // Mailchimp API information
 const MAIL_SVC_API_KEY = process.env.MC_SM_LL_WEBH_KEY;
@@ -40,137 +20,42 @@ const emailToMd5 = (email) => {
     return crypto.createHash('md5').update(email.toLowerCase()).digest('hex');
 };
 
-// Function to add a new subscriber to the Mailchimp audience, or skip if they already exist
-const addSubscriberToAudience = async (email, shippingAddress) => {
+// Function to add or update a subscriber in the Mailchimp audience
+const addOrUpdateSubscriber = async (email, shippingAddress) => {
+    if (!email) {
+        throw new Error('Email is missing');
+    }
+
     const subscriberHash = emailToMd5(email);
     const url = `https://${SERVER_PREFIX}.api.mailchimp.com/3.0/lists/${AUDIENCE_ID}/members/${subscriberHash}`;
 
-    // Prepare the data for adding or updating a subscriber
     const subscriberData = {
         email_address: email,
-        status: "subscribed",
+        status_if_new: "subscribed", // If the subscriber is new, set the status
         merge_fields: {
             FNAME: shippingAddress.name.split(' ')[0] || '', // First name
             LNAME: shippingAddress.name.split(' ')[1] || '', // Last name
-            ADDRESS: `${shippingAddress.street1}, ${shippingAddress.street2}, ${shippingAddress.city}, ${shippingAddress.state_code} ${shippingAddress.postcode}`,
-            PHONE: shippingAddress.phone_number || '', // If PHONE field exists in Mailchimp
+            STREET1: shippingAddress.street1 || '',
+            STREET2: shippingAddress.street2 || '',
+            CITY: shippingAddress.city || '',
+            STATE: shippingAddress.state_code || '',
+            ZIPCODE: shippingAddress.postcode || '',
+            PHONE: shippingAddress.phone_number || '',
         },
     };
 
-    console.log(subscriberData);
-
     try {
-        // First, check if the subscriber already exists in the audience.
-        const response = await axios.get(url, {
+        // Attempt to update the subscriber's information
+        await axios.put(url, subscriberData, {
             headers: {
                 'Authorization': getAuthHeader(),
                 'Content-Type': 'application/json',
             },
         });
-
-        if (response.status === 200) {
-            console.log(`${email} is already in the audience.`);
-            
-            // Update the existing subscriber with new address and phone number
-            const updateResponse = await axios.patch(url, { merge_fields: subscriberData.merge_fields }, {
-                headers: {
-                    'Authorization': getAuthHeader(),
-                    'Content-Type': 'application/json',
-                },
-            });
-
-            if (updateResponse.status === 200) {
-                console.log(`Updated contact info for ${email}`);
-            } else {
-                console.log(`Failed to update contact info for ${email}:`, updateResponse.status);
-            }
-            return; // Exit the function after updating the subscriber
-        }
+        console.log(`Subscriber ${email} added/updated successfully.`);
     } catch (error) {
-        // Only proceed if the error is 404, indicating the subscriber is not found
-        if (error.response && error.response.status === 404) {
-            console.log('Subscriber not found, proceeding to add them.');
-        } else {
-            console.error('Error checking subscriber:', error.message);
-            throw new Error('Failed to check subscriber status');
-        }
-    }
-
-    // Attempt to add the new subscriber
-    try {
-        const addUrl = `https://${SERVER_PREFIX}.api.mailchimp.com/3.0/lists/${AUDIENCE_ID}/members`;
-        console.log("Subscriber Data: ", subscriberData);
-
-        await axios.post(addUrl, subscriberData, {
-            headers: {
-                'Authorization': getAuthHeader(),
-                'Content-Type': 'application/json',
-            },
-        });
-
-        console.log(`Successfully added ${email} to the audience.`);
-    } catch (postError) {
-        if (postError.response) {
-            console.error('Error adding subscriber:', postError.response.status, postError.response.data);
-        } else {
-            console.error('General Error adding subscriber:', postError.message);
-        }
-        throw new Error('Failed to add subscriber');
-    }
-}; // addSubscriberToAudience
-
-
-// Function to send email via Mailchimp
-const sendMailchimpEmail = async (email, subject, body) => {
-    const url = `https://${SERVER_PREFIX}.api.mailchimp.com/3.0/campaigns`;
-
-    const campaignData = {
-        type: "regular",
-        recipients: {
-            list_id: AUDIENCE_ID,
-        },
-        settings: {
-            subject_line: subject,
-            title: subject,
-            from_name: "SOAW Publishing Company",
-            reply_to: "soaw4life@gmail.com",
-        },
-    };
-
-    try {
-        const campaignResponse = await axios.post(url, campaignData, {
-            headers: {
-                'Authorization': getAuthHeader(),
-                'Content-Type': 'application/json',
-            },
-        });
-
-        const campaignId = campaignResponse.data.id;
-
-        const contentUrl = `https://${SERVER_PREFIX}.api.mailchimp.com/3.0/campaigns/${campaignId}/content`;
-
-        await axios.put(contentUrl, {
-            html: `<p>${body}</p>`,
-        }, {
-            headers: {
-                'Authorization': getAuthHeader(),
-                'Content-Type': 'application/json',
-            },
-        });
-
-        const sendUrl = `https://${SERVER_PREFIX}.api.mailchimp.com/3.0/campaigns/${campaignId}/actions/send`;
-
-        await axios.post(sendUrl, {}, {
-            headers: {
-                'Authorization': getAuthHeader(),
-                'Content-Type': 'application/json',
-            },
-        });
-    } catch (postError) {
-        console.error('Error sending email via/from Mailchimp:', postError.message);
-        console.error(postError.response.status);
-        console.error(postError.response.data);
-        throw new Error('Failed to send email');
+        console.error(`Failed to add/update subscriber ${email}:`, error.response?.data || error.message);
+        throw new Error('Failed to process subscriber');
     }
 };
 
@@ -182,25 +67,20 @@ exports.handler = async (event) => {
 
     try {
         const webhookData = JSON.parse(event.body);
-        // console.log('Received webhook data:', webhookData);
 
         if (!webhookData.data || !webhookData.data.status) {
             throw new Error('Invalid webhook data');
         }
 
-        const { status: { name }, contact_email, shipping_address } = webhookData.data;
+        const { contact_email, shipping_address } = webhookData.data;
 
-        // console.log('Shipping Address:', shipping_address); // Log the shipping address for debugging
-
-        if (statusActions[name]) {
-            const { subject, body } = statusActions[name];
-
-            // Add the buyer to the audience with shipping details
-            await addSubscriberToAudience(contact_email, shipping_address);
-
-            // Send email via Mailchimp
-            await sendMailchimpEmail(contact_email, subject, body); // Uncommented to enable sending email
+        // If the email is not provided, skip Mailchimp update
+        if (!contact_email || contact_email.trim() === '') {
+            return buildResponse(400, { message: 'Email is missing' });
         }
+
+        // Add or update the subscriber in Mailchimp
+        await addOrUpdateSubscriber(contact_email, shipping_address);
 
         return buildResponse(200, { message: 'Webhook processed successfully' });
     } catch (error) {
