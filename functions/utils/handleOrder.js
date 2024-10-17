@@ -2,6 +2,7 @@
 import buildResponse from './buildResponse';
 import getListOfWebhooks from './getListOfWebhooks';
 import subscribeToWebhooks from './subscribeToWebhooks';
+import updateMailchimpList from './updateMailchimpList';
 
 const handleOrder = async (event, createPrintJob) => {
     if (event.httpMethod === 'OPTIONS') {
@@ -18,6 +19,7 @@ const handleOrder = async (event, createPrintJob) => {
             await subscribeToWebhooks();
         }
 
+        await updateMailchimpList(orderSummary);
         await createPrintJob(orderSummary);
 
         return buildResponse(200, { message: 'Order processed successfully', orderId: orderSummary.id });
