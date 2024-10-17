@@ -1,7 +1,7 @@
 import axios from 'axios'; // Directly import axios
 
 const getAccessToken = async () => {
-  const apiBaseURL = process.env.SAM_PRINT_JOBS; // Define apiBaseURL here
+  const apiBaseURL = process.env.SAM_SANDBOX_PRINT_JOBS; // Define apiBaseURL here
 
   const url = `${apiBaseURL}${process.env.SAM_AUTH}`; // Use the correct path
 
@@ -11,7 +11,7 @@ const getAccessToken = async () => {
 
   const headers = {
     'Content-Type': process.env.SAM_CONTENT_TYPE,
-    'Authorization': `Basic ${process.env.SAM_ENCODED}`,
+    'Authorization': `Basic ${process.env.SAM_SANDBOX_ENCODED}`,
   };
 
   try {
