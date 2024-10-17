@@ -30,7 +30,7 @@ const addOrUpdateSubscriber = async (email, shippingAddress) => {
     const url = `https://${SERVER_PREFIX}.api.mailchimp.com/3.0/lists/${AUDIENCE_ID}/members/${subscriberHash}`;
 
     const subscriberData = {
-        email_address: email,
+        email_address: email || null,
         status_if_new: "subscribed", // If the subscriber is new, set the status
         merge_fields: {
             FNAME: shippingAddress.name.split(' ')[0] || '', // First name
