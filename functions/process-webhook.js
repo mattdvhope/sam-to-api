@@ -73,10 +73,12 @@ exports.handler = async (event) => {
         }
 
         const { contact_email, shipping_address } = webhookData.data;
+        const name = shipping_address.name || 'Unknown';
 
         // If the email is not provided, skip Mailchimp update
         if (!contact_email || contact_email.trim() === '') {
-            return buildResponse(400, { message: 'Email is missing' });
+            console.log(`Email of ${name} is missing`);
+            return buildResponse(400, { message: `Email of ${name} is missing` });
         }
 
         // Add or update the subscriber in Mailchimp
