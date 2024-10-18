@@ -68,7 +68,7 @@ export const shippedHtml = createHtmlContent(
     "Hooray!! Your copy of <u>The Source of All Wealth</u> has Shipped!!",
     `
         <p class="paragraph">
-            You can expect it to arrive at your address in a little over a week. Once you read it... or even before them! ...I'd love to hear from you!
+            You can expect it to arrive at your address in a little over a week. Once you read it... or even before then... I'd love to hear from you!
         </p>
         <p class="paragraph">
             If you have any questions... or just want to say "Hello!" ...please write back to me, Matt Malone, at this email address, info@sourceofallwealth.com! I'll write to you personally!
