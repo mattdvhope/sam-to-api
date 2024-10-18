@@ -32,7 +32,7 @@ export const productionDelayedHtml = createHtmlContent(
             <b>You can look forward to a top quality "print-on-demand" edition of <u>The Source of All Wealth</u> coming your way!</b>
         </p>
         <p class="paragraph">
-            If you have any questions or concerns... or just want to say "Hello!" ...please write back to me, Matt Malone, at info@sourceofallwealth.com! I'll write to you personally!
+            If you have any questions... or just want to say "Hello!" ...please write back to me, Matt Malone, at this email address, info@sourceofallwealth.com! I'll write to you personally!
         </p>
     `
 );
@@ -44,7 +44,7 @@ export const productionReadyHtml = createHtmlContent(
             I'll keep you posted on its progress. I take great pride in ensuring that you receive a <b>carefully crafted, top quality 665-page page-turner</b> that you will thoroughly ENJOY!
         </p>
         <p class="paragraph">
-            If you have any questions or concerns... or just want to say "Hello!" ...please write back to me, Matt Malone, at info@sourceofallwealth.com! I'll write to you personally!
+            If you have any questions... or just want to say "Hello!" ...please write back to me, Matt Malone, at this email address, info@sourceofallwealth.com! I'll write to you personally!
         </p>
     `
 );
@@ -59,7 +59,7 @@ export const inProductionHtml = createHtmlContent(
             I'll let you know when it gets on the truck for <b>SHIPPING</b> to you!
         </p>
         <p class="paragraph">
-            If you have any questions or concerns... or just want to say "Hello!" ...please write back to me, Matt Malone, at info@sourceofallwealth.com! I'll write to you personally!
+            If you have any questions... or just want to say "Hello!" ...please write back to me, Matt Malone, at this email address, info@sourceofallwealth.com! I'll write to you personally!
         </p>
     `
 );
@@ -71,7 +71,7 @@ export const shippedHtml = createHtmlContent(
             You can expect it to arrive at your address in a little over a week. Once you read it... or even before them! ...I'd love to hear from you!
         </p>
         <p class="paragraph">
-            If you have any questions or concerns... or just want to say "Hello!" ...please write back to me, Matt Malone, at info@sourceofallwealth.com! I'll write to you personally!
+            If you have any questions... or just want to say "Hello!" ...please write back to me, Matt Malone, at this email address, info@sourceofallwealth.com! I'll write to you personally!
         </p>
     `
 );
