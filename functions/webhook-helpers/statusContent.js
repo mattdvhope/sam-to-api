@@ -16,55 +16,62 @@ const createHtmlContent = (heading, bodyContent) => `
         </head>
         <body>
             <h1 class="heading">${heading}</h1>
-            <img src="https://drive.google.com/uc?id=1xjc3AQolPR3UZvdJ3h5b0pcaZymkySMg" alt="Book Cover" style="width: 100%; height: auto;"/>
             ${bodyContent}
+            <img src="https://drive.google.com/uc?id=1xjc3AQolPR3UZvdJ3h5b0pcaZymkySMg" alt="Book Cover" style="width: 100%; height: auto;"/>
         </body>
     </html>
 `;
 
 export const productionDelayedHtml = createHtmlContent(
-    "Your book printing is in the docket!!",
+    "Your copy of <u>The Source of All Wealth</u> is on the docket for printing!!",
     `
         <p class="paragraph">
-            We wanted to let you know that your book is on the docket and will get on schedule for printing soon!.
+            I wanted to let you know that your book is on the docket and will head toward the <b>PRINTING PRESSES</b> soon!.
         </p>
-        <p><b>You can look forward to a high quality "print on demand" job starting soon.</b></p>
-        <p>If you have any questions or concerns, please write to info@sourceofallwealth.com!</p>
+        <p class="paragraph">
+            <b>You can look forward to a top quality "print-on-demand" copy of <u>The Source of All Wealth</u> coming your way!</b>
+        </p>
+        <p class="paragraph">
+            If you have any questions or concerns... or just want to say "Hello!" ...please write to me, Matt Malone, at info@sourceofallwealth.com! I'll write back to you personally!
+        </p>
     `
 );
 
 export const productionReadyHtml = createHtmlContent(
-    "Getting ready to print your book!",
+    "Your copy of <u>The Source of All Wealth</u> will move into the big printing press room shortly!",
     `
         <p class="paragraph">
-            Good news! Your book will be ready for printing soon. 
-            We will keep you updated on the progress.
+            I'll keep you posted on its progress. I take great pride in ensuring that you receive a <b>carefully crafted, top quality 665-page page-turner</b> that you will thoroughly ENJOY!
         </p>
-        <p><b>We will take extra care in crafting a worldclass book for you!</b></p>
-        <p>If you have any questions or concerns, please write to info@sourceofallwealth.com!</p>
+        <p class="paragraph">
+            If you have any questions or concerns... or just want to say "Hello!" ...please write to me, Matt Malone, at info@sourceofallwealth.com! I'll write back to you personally!
+        </p>
     `
 );
 
 export const inProductionHtml = createHtmlContent(
-    "Your Book is Going to Press Now!",
+    "Your copy of <u>The Source of All Wealth</u> is <i>Going to Press</i> Now!",
     `
         <p class="paragraph">
-            Good news! Your book is now in production. 
-            We will let you know when we ship it!
+            Good news! Your copy of <u>The Source of All Wealth</u> is now in the big printing press room! <b>Ink & Paper will MEET</b> in this huge noisy place!
         </p>
-        <p><b>We take pride in our workmanship!</b></p>
-        <p>If you have any questions or concerns, please write to info@sourceofallwealth.com!</p>
+        <p class="paragraph">
+            I'll let you know when it gets on the truck for <b>SHIPPING</b> to you!
+        </p>
+        <p class="paragraph">
+            If you have any questions or concerns... or just want to say "Hello!" ...please write to me, Matt Malone, at info@sourceofallwealth.com! I'll write back to you personally!
+        </p>
     `
 );
 
 export const shippedHtml = createHtmlContent(
-    "Your Book has Shipped!!",
+    "Hooray!! Your copy of <u>The Source of All Wealth</u> has Shipped!!",
     `
         <p class="paragraph">
-            Good news! Your book has been shipped! 
-            You can expect it in a little over a week.
+            You can expect it to arrive at your address in a little over a week. Once you read it... or even before them! ...I'd love to hear from you!
         </p>
-        <p><b>We take pride in our workmanship!</b></p>
-        <p>If you have any questions or concerns, please write to info@sourceofallwealth.com!</p>
+        <p class="paragraph">
+            If you have any questions or concerns... or just want to say "Hello!" ...please write to me, Matt Malone, at info@sourceofallwealth.com! I'll write back to you personally!
+        </p>
     `
 );
