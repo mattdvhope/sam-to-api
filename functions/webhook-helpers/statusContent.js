@@ -29,7 +29,7 @@ export const productionDelayedHtml = createHtmlContent(
             I wanted to let you know that your book is on the docket and will head toward the <b>PRINTING PRESSES</b> soon!.
         </p>
         <p class="paragraph">
-            <b>You can look forward to a top quality "print-on-demand" copy of <u>The Source of All Wealth</u> coming your way!</b>
+            <b>You can look forward to a top quality "print-on-demand" edition of <u>The Source of All Wealth</u> coming your way!</b>
         </p>
         <p class="paragraph">
             If you have any questions or concerns... or just want to say "Hello!" ...please write to me, Matt Malone, at info@sourceofallwealth.com! I'll write back to you personally!
