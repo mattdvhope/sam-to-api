@@ -11,6 +11,7 @@ const handleOrder = async (event, createPrintJob) => {
 
     try {
         const parsedBody = JSON.parse(event.body);
+        console.log(event.body);
         const orderSummary = parsedBody.orderSummary;
 
         const existingWebhooks = await getListOfWebhooks();
