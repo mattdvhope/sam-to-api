@@ -20,4 +20,5 @@ dist/
 .netlify
 
 OrderSummaryStructure.md
-
+ResponseData.md
+WebhookData.md
