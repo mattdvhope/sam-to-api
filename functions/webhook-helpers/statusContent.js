@@ -11,6 +11,7 @@ const createHtmlContent = (heading, bodyContent) => `
                 }
                 p {
                     font-family: 'Palatino Linotype', serif;
+                    font-size: 200%;
                 }
             </style>
         </head>
@@ -33,6 +34,9 @@ export const productionDelayedHtml = createHtmlContent(
         </p>
         <p class="paragraph">
             If you have any questions... or just want to say "Hello!" ...please write back to me, Matt Malone, at this email address, info@sourceofallwealth.com! I'll write to you personally!
+        </p>
+        <p class="paragraph">
+            Here is your link to my <a href="https://drive.google.com/file/d/1Pyu3VAMZf9aSoHTN4XCpNOfYvy61UGBI/view" target="_blank">Newsletter</a>!
         </p>
     `
 );
