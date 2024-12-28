@@ -28,3 +28,4 @@ const sendEmailWithMailgun = async (email, subject, body) => {
 };
 
 export default sendEmailWithMailgun;
+
