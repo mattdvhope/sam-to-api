@@ -8,7 +8,7 @@ const mg = mailgun.client({
   key: process.env.MAILGUN_API_KEY || 'key-yourkeyhere',
 });
 
-// Function to send an email
+// Function to send an email.
 const sendEmailWithMailgun = async (email, subject, body) => {
 
     console.log("Print Job Status: ", subject);
