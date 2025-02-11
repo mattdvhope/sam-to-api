@@ -65,7 +65,7 @@ export const inProductionHtml = createHtmlContent(
 );
 
 export const shippedHtml = createHtmlContent(
-    "Hooray!! Your copy of <u>The Source of All Wealth</u> has Shipped!!",
+    "Hooray!! Your book has been Shipped! It's on the way to your home!",
     `
         <p class="paragraph">
             You can expect your new book to arrive at your address in a little over a week!
