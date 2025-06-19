@@ -11,21 +11,23 @@ exports.handler = async function (event, context) {
     };
   }
 
-  let data;
-  try {
-    data = JSON.parse(event.body);
-  } catch (err) {
-    console.error("❌ JSON parse error:", err);
-    return {
-      statusCode: 400,
-      body: JSON.stringify({ message: 'Invalid JSON', error: err.message }),
-    };
-  }
+  const parsed = (() => {
+    try {
+      return JSON.parse(event.body);
+    } catch (err) {
+      console.error("❌ JSON parse error:", err);
+      throw new Error(JSON.stringify({
+        statusCode: 400,
+        message: 'Invalid JSON',
+        error: err.message
+      }));
+    }
+  })();
 
-  const email = data?.orderSummary?.customer?.email;
+  const email = parsed?.orderSummary?.customer?.email;
 
   if (!email) {
-    console.error("❌ No customer email found in:", data);
+    console.error("❌ No customer email found in:", parsed);
     return {
       statusCode: 400,
       body: JSON.stringify({ message: 'Missing customer email' }),
