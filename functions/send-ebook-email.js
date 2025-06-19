@@ -1,14 +1,15 @@
 import Mailgun from 'mailgun.js';
 import formData from 'form-data'; // ✅ required for Mailgun in Node
 
-const mailgun = Mailgun.client({
+// ✅ Proper Mailgun instantiation
+const mailgunInstance = new Mailgun(formData);
+const mailgun = mailgunInstance.client({
   username: 'api',
   key: process.env.MAILGUN_API_KEY,
   url: 'https://api.mailgun.net', // optional but explicit
-  formData // ✅ must include this
 });
 
-// Reusable CORS headers
+// ✅ Reusable CORS headers
 const CORS_HEADERS = {
   'Access-Control-Allow-Origin': 'https://soaw.samcart.com',
   'Access-Control-Allow-Headers': 'Content-Type',
@@ -19,7 +20,7 @@ const CORS_HEADERS = {
 export const handler = async (event) => {
   console.log("📥 Function triggered. Raw event:", event);
 
-  // Handle preflight
+  // ✅ Handle CORS preflight
   if (event.httpMethod === 'OPTIONS') {
     return {
       statusCode: 200,
