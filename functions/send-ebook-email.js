@@ -1,13 +1,13 @@
-import Mailgun from 'mailgun.js';
+const mailgun = require('mailgun-js');
 
 exports.handler = async function (event, context) {
-  console.log("Function triggered. Raw event body:", event.body);
+  console.log("📥 Function triggered. Raw event body:", event.body);
 
   let data;
   try {
     data = typeof event.body === 'string' ? JSON.parse(event.body) : event.body;
   } catch (parseError) {
-    console.error("Failed to parse event.body:", parseError);
+    console.error("❌ Failed to parse event.body:", parseError);
     return {
       statusCode: 400,
       body: JSON.stringify({ message: 'Invalid JSON in body', error: parseError.message }),
@@ -17,14 +17,14 @@ exports.handler = async function (event, context) {
   const email = data?.orderSummary?.customer?.email;
 
   if (!email) {
-    console.error("No customer email found.");
+    console.error("❌ No customer email found.");
     return {
       statusCode: 400,
       body: JSON.stringify({ message: 'Missing customer email' }),
     };
   }
 
-  console.log("Email to send:", email);
+  console.log("📧 Email to send:", email);
 
   const mg = mailgun({
     apiKey: process.env.MAILGUN_API_KEY,
@@ -38,17 +38,17 @@ exports.handler = async function (event, context) {
     html: `Thanks for your purchase! Click <a href="https://www.sourceofallwealth.com/e-book-install-instructions">here</a> to get instructions on how to open your ebook.`,
   };
 
-  console.log("Mailgun payload:", emailData);
+  console.log("📨 Mailgun payload:", emailData);
 
   try {
     const response = await mg.messages().send(emailData);
-    console.log("Mailgun response:", response);
+    console.log("✅ Mailgun response:", response);
     return {
       statusCode: 200,
       body: JSON.stringify({ message: 'Email sent successfully' }),
     };
   } catch (error) {
-    console.error("Mailgun error:", error);
+    console.error("🚨 Mailgun error:", error);
     return {
       statusCode: 500,
       body: JSON.stringify({ message: 'Email failed to send', error: error.message }),
