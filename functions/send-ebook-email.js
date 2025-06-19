@@ -64,7 +64,7 @@ export const handler = async (event) => {
   console.log("📧 Email to send:", email);
 
   const emailData = {
-    from: process.env.FROM_EMAIL,
+    from: `Matt Malone <info@${process.env.MAILGUN_DOMAIN}>`,
     to: email,
     subject: `How to Start Reading Your Ebook`,
     html: `Thanks for your purchase! Click <a href="https://www.sourceofallwealth.com/e-book-install-instructions">here</a> to get instructions on how to open your ebook.`,
