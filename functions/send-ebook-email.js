@@ -68,7 +68,21 @@ export const handler = async (event) => {
     to: email,
     subject: `How to Start Reading Your Ebook`,
     text: 'Thanks for your purchase! Visit https://www.sourceofallwealth.com/e-book-install-instructions to get instructions on how to open your ebook.',
-    html: `Thanks for your purchase! Click <a href="https://www.sourceofallwealth.com/e-book-install-instructions">here</a> to get instructions on how to open your ebook.`,
+    html: `
+            <div style="font-family: Georgia, serif; font-size: 16px; color: #333; line-height: 2.1;">
+              <p style="margin: 0 0 16px 0;">
+                Thanks for your purchase!
+              </p>
+              <p style="margin: 0;">
+                Click 
+                <a href="https://www.sourceofallwealth.com/e-book-install-instructions"
+                   style="color: #0056b3; text-decoration: underline;">
+                  here
+                </a>
+                to get instructions on how to open your ebook.
+              </p>
+            </div>
+          `,
   };
 
   console.log("📨 Mailgun payload:", emailData);
