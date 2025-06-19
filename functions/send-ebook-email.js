@@ -64,22 +64,19 @@ export const handler = async (event) => {
   console.log("📧 Email to send:", email);
 
   const emailData = {
-    from: `Matt Malone <info@${process.env.MAILGUN_DOMAIN}>`,
+    from: `Matt Malone - Author <info@${process.env.MAILGUN_DOMAIN}>`,
     to: email,
     subject: `How to Start Reading Your Ebook`,
-    text: 'Thanks for your purchase! Visit https://www.sourceofallwealth.com/e-book-install-instructions to get instructions on how to open your ebook.',
+    text: `I hope you enjoy “The Source of All Wealth!” Visit https://www.sourceofallwealth.com/e-book-install-instructions to get instructions on how to open your ebook.`,
     html: `
             <div style="font-family: Georgia, serif; font-size: 16px; color: #333; line-height: 2.1;">
               <p style="margin: 0 0 16px 0;">
-                Thanks for your purchase!
+                I hope you enjoy <span style="font-weight: 600;">“The Source of All Wealth”</span>!
               </p>
               <p style="margin: 0;">
-                Click 
                 <a href="https://www.sourceofallwealth.com/e-book-install-instructions"
                    style="color: #0056b3; text-decoration: underline;">
-                  here
-                </a>
-                to get instructions on how to open your ebook.
+                  Click here</a> to get instructions on how to open your ebook.
               </p>
             </div>
           `,
