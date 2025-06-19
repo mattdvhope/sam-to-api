@@ -1,4 +1,4 @@
-const mailgun = require('mailgun-js');
+import Mailgun from 'mailgun.js';
 
 exports.handler = async function (event, context) {
   console.log("📥 Function triggered. Raw event body:", event.body);
