@@ -71,7 +71,7 @@ export const handler = async (event) => {
     html: `
             <div style="font-family: Georgia, serif; font-size: 16px; color: #333; line-height: 2.1;">
               <p style="margin: 0 0 16px 0;">
-                I hope you enjoy <span style="font-weight: 600;">“The Source of All Wealth”</span>!
+                I hope you enjoy <span style="font-weight: 600;">“The Source of All Wealth!”</span>
               </p>
               <p style="margin: 0;">
                 <a href="https://www.sourceofallwealth.com/e-book-install-instructions"
