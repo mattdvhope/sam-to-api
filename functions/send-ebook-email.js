@@ -69,14 +69,14 @@ export const handler = async (event) => {
     subject: `How to Start Reading Your Ebook`,
     text: `I hope you enjoy “The Source of All Wealth!” Visit https://www.sourceofallwealth.com/e-book-install-instructions to get instructions on how to open your ebook.`,
     html: `
-            <div style="font-family: Georgia, serif; font-size: 16px; color: #333; line-height: 2.1;">
+            <div style="font-family: Georgia, serif; font-size: 16px; color: #333; line-height: 3.5;">
               <p style="margin: 0 0 16px 0;">
                 I hope you enjoy <span style="font-weight: 600;">“The Source of All Wealth!”</span>
               </p>
               <p style="margin: 0;">
                 <a href="https://www.sourceofallwealth.com/e-book-install-instructions"
                    style="color: #0056b3; text-decoration: underline;">
-                  Click here</a> to get instructions on how to open your ebook.
+                  Click here</a> to get instructions on how to open your Ebook.
               </p>
             </div>
           `,
