@@ -3,21 +3,29 @@ import Mailgun from 'mailgun.js';
 exports.handler = async function (event, context) {
   console.log("📥 Function triggered. Raw event body:", event.body);
 
-  let data;
-  try {
-    data = typeof event.body === 'string' ? JSON.parse(event.body) : event.body;
-  } catch (parseError) {
-    console.error("❌ Failed to parse event.body:", parseError);
+  if (!event.body) {
+    console.error("❌ event.body is empty");
     return {
       statusCode: 400,
-      body: JSON.stringify({ message: 'Invalid JSON in body', error: parseError.message }),
+      body: JSON.stringify({ message: 'No body received' }),
+    };
+  }
+
+  let data;
+  try {
+    data = JSON.parse(event.body);
+  } catch (err) {
+    console.error("❌ JSON parse error:", err);
+    return {
+      statusCode: 400,
+      body: JSON.stringify({ message: 'Invalid JSON', error: err.message }),
     };
   }
 
   const email = data?.orderSummary?.customer?.email;
 
   if (!email) {
-    console.error("❌ No customer email found.");
+    console.error("❌ No customer email found in:", data);
     return {
       statusCode: 400,
       body: JSON.stringify({ message: 'Missing customer email' }),
