@@ -1,8 +1,14 @@
 import Mailgun from 'mailgun.js';
+import formData from 'form-data'; // ✅ required for Mailgun in Node
 
-const mailgun = Mailgun.default;
+const mailgun = Mailgun.client({
+  username: 'api',
+  key: process.env.MAILGUN_API_KEY,
+  url: 'https://api.mailgun.net', // optional but explicit
+  formData // ✅ must include this
+});
 
-// Optional: Extract CORS headers to reuse
+// Reusable CORS headers
 const CORS_HEADERS = {
   'Access-Control-Allow-Origin': 'https://soaw.samcart.com',
   'Access-Control-Allow-Headers': 'Content-Type',
@@ -10,7 +16,7 @@ const CORS_HEADERS = {
   'Access-Control-Allow-Credentials': 'true',
 };
 
-exports.handler = async function (event) {
+export const handler = async (event) => {
   console.log("📥 Function triggered. Raw event:", event);
 
   // Handle preflight
@@ -56,11 +62,6 @@ exports.handler = async function (event) {
 
   console.log("📧 Email to send:", email);
 
-  const mg = mailgun({
-    apiKey: process.env.MAILGUN_API_KEY,
-    domain: process.env.MAILGUN_DOMAIN,
-  });
-
   const emailData = {
     from: process.env.FROM_EMAIL,
     to: email,
@@ -71,7 +72,7 @@ exports.handler = async function (event) {
   console.log("📨 Mailgun payload:", emailData);
 
   try {
-    const response = await mg.messages().send(emailData);
+    const response = await mailgun.messages.create(process.env.MAILGUN_DOMAIN, emailData);
     console.log("✅ Mailgun response:", response);
     return {
       statusCode: 200,
