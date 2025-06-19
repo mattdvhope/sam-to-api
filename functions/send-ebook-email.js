@@ -1,5 +1,7 @@
 import Mailgun from 'mailgun.js';
 
+const mailgun = Mailgun.default;
+
 // Optional: Extract CORS headers to reuse
 const CORS_HEADERS = {
   'Access-Control-Allow-Origin': 'https://soaw.samcart.com',
