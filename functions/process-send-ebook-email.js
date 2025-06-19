@@ -1,6 +1,6 @@
 import Mailgun from 'mailgun.js';
 
-exports.handler = async function (event, context) {
+exports.handler = async function (event) {
   console.log("📥 Function triggered. Raw event body:", event.body);
   console.log("📥 Function triggered. Raw event:", event);
 
