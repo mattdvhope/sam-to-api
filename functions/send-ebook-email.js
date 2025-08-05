@@ -66,17 +66,35 @@ export const handler = async (event) => {
   const emailData = {
     from: `Matt Malone - Author <info@${process.env.MAILGUN_DOMAIN}>`,
     to: email,
-    subject: `How to Start Reading Your Ebook`,
+    subject: `How to Set Up Your Ebook & Audiobook`,
     text: `I hope you enjoy “The Source of All Wealth!” Visit https://www.sourceofallwealth.com/e-book-install-instructions to get instructions on how to open your ebook.`,
     html: `
             <div style="font-family: Georgia, serif; font-size: 16px; color: #333; line-height: 3.5;">
               <p style="margin: 0 0 16px 0;">
                 I hope you enjoy <span style="font-weight: 600;">“The Source of All Wealth!”</span>
               </p>
-              <p style="margin: 0;">
+
+              <p style="margin: 0 0 16px 0;">
                 <a href="https://www.sourceofallwealth.com/e-book-install-instructions"
                    style="color: #0056b3; text-decoration: underline;">
-                  Click here</a> to get instructions on how to open your Ebook.
+                  Click here</a> to get step-by-step instructions on how to open your Ebook and set up your Audiobook.
+              </p>
+
+              <p style="margin: 0 0 16px 0;">
+                Your audiobook will include all 151 chapters in MP3 format.
+                On that page, you'll also find simple instructions for:
+                <ul style="margin: 8px 0 16px 0; padding-left: 20px;">
+                  <li><strong>Voice Audiobook Player</strong> (Android)</li>
+                  <li><strong>BookPlayer</strong> (iPhone & iPad)</li>
+                </ul>
+              </p>
+
+              <p style="margin: 0 0 16px 0;">
+                🎧 <strong>Your Audiobook:</strong><br>
+                <a href="https://soaw-audio-book.s3.us-east-1.amazonaws.com/premium/SourceOfAllWealth.zip"
+                   style="color: #0056b3; text-decoration: underline;">
+                  Click here to download the full audiobook</a><br>
+                (ZIP format – 151 chapters in MP3)
               </p>
             </div>
           `,
