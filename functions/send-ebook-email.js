@@ -77,24 +77,28 @@ export const handler = async (event) => {
               <p style="margin: 0 0 16px 0;">
                 <a href="https://www.sourceofallwealth.com/e-book-install-instructions"
                    style="color: #0056b3; text-decoration: underline;">
-                  Click here</a> to get step-by-step instructions on how to open your Ebook and set up your Audiobook.
+                  Click here</a> for step-by-step instructions on how to open your Ebook and set up your Audiobook.
               </p>
 
-              <p style="margin: 0 0 16px 0;">
-                Your audiobook will include all 151 chapters in MP3 format.
-                On that page, you'll also find simple instructions for:
-                <ul style="margin: 8px 0 16px 0; padding-left: 20px;">
-                  <li><strong>Voice Audiobook Player</strong> (Android)</li>
-                  <li><strong>BookPlayer</strong> (iPhone & iPad)</li>
-                </ul>
+              <p style="margin: 0 0 8px 0;">
+                Your audiobook includes all 151 chapters in MP3 format. That same page provides simple setup guides for:
               </p>
+
+              <ul style="margin: 0 0 16px 20px; padding: 0;">
+                <li><strong>Voice Audiobook Player</strong> (Android)</li>
+                <li><strong>BookPlayer</strong> (iPhone & iPad)</li>
+              </ul>
 
               <p style="margin: 0 0 16px 0;">
                 🎧 <strong>Your Audiobook:</strong><br>
                 <a href="https://soaw-audio-book.s3.us-east-1.amazonaws.com/premium/SourceOfAllWealth.zip"
                    style="color: #0056b3; text-decoration: underline;">
                   Click here to download the full audiobook</a><br>
-                (ZIP format – 151 chapters in MP3)
+                (ZIP format – 151 MP3 chapters)
+              </p>
+
+              <p style="margin: 0 0 16px 0;">
+                Once downloaded, the instructions page will show you how to import the audiobook into your chosen app.
               </p>
             </div>
           `,
