@@ -69,36 +69,35 @@ export const handler = async (event) => {
     subject: `How to Set Up Your Ebook & Audiobook`,
     text: `I hope you enjoy “The Source of All Wealth!” Visit https://www.sourceofallwealth.com/e-book-install-instructions to get instructions on how to open your ebook.`,
     html: `
-            <div style="font-family: Georgia, serif; font-size: 16px; color: #333; line-height: 3.5;">
-              <p style="margin: 0 0 16px 0;">
-                I hope you enjoy <span style="font-weight: 600;">“The Source of All Wealth!”</span>
+            <div style="font-family: Georgia, 'Times New Roman', serif; font-size:16px; color:#333; line-height:1.6;">
+              <p style="margin:0 0 16px 0;">
+                Thank you for your order of <strong>“The Source of All Wealth” (eBook)</strong>.
               </p>
 
-              <p style="margin: 0 0 16px 0;">
+              <p style="margin:0 0 16px 0;">
                 <a href="https://www.sourceofallwealth.com/e-book-install-instructions"
-                   style="color: #0056b3; text-decoration: underline;">
-                  Click here</a> for step-by-step instructions on how to open your Ebook and set up your Audiobook.
+                   style="color:#0056b3; text-decoration:underline;">Click here</a>
+                for step-by-step setup on iPhone/iPad, Android, and desktop.
               </p>
 
-              <p style="margin: 0 0 8px 0;">
-                Your audiobook includes all 151 chapters in MP3 format. That same page provides simple setup guides for:
-              </p>
-
-              <ul style="margin: 0 0 16px 20px; padding: 0;">
-                <li><strong>Voice Audiobook Player</strong> (Android)</li>
-                <li><strong>BookPlayer</strong> (iPhone & iPad)</li>
+              <ul style="margin:0 0 16px 20px; padding:0;">
+                <li><strong>iPhone/iPad:</strong> Tap the EPUB, then choose <em>Open in Books</em> (Apple Books).</li>
+                <li><strong>Android:</strong> Open with <em>Google Play Books</em> or a free reader like <em>ReadEra</em> or <em>Lithium</em>.</li>
+                <li><strong>Desktop:</strong> Open in <em>Apple Books</em> (macOS) or <em>Calibre</em> (Windows/macOS).</li>
               </ul>
 
-              <p style="margin: 0 0 16px 0;">
-                🎧 <strong>Your Audiobook:</strong><br>
-                <a href="https://soaw-audio-book.s3.us-east-1.amazonaws.com/premium/SourceOfAllWealth.zip"
-                   style="color: #0056b3; text-decoration: underline;">
-                  Click here to download the full audiobook</a><br>
-                (ZIP format – 151 MP3 chapters)
+              <p style="margin:0 0 16px 0;">
+                Need a hand? Just reply to this email—happy to help.
               </p>
 
-              <p style="margin: 0 0 16px 0;">
-                Once downloaded, the instructions page will show you how to import the audiobook into your chosen app.
+              <p style="margin:0 0 16px 0; font-size:14px; color:#555;">
+                <strong>120-Day Money-Back Guarantee:</strong> If the eBook isn’t for you, reply within 120 days for a full refund.
+              </p>
+
+              <hr style="border:none; border-top:1px solid #ddd; margin:16px 0;">
+
+              <p style="margin:0; font-size:14px; color:#555;">
+                Order support: <a href="mailto:info@sourceofallwealth.com" style="color:#0056b3; text-decoration:underline;">info@sourceofallwealth.com</a>
               </p>
             </div>
           `,
