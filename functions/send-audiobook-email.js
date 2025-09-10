@@ -44,7 +44,7 @@ export const handler = async (event) => {
 		  </p>
 
 		  <p style="margin:0 0 16px 0;">
-		    Go here to access step-by-step guides (with screenshots), 
+		    Go here to access step-by-step guides (with screenshots): 
 		    <a href="https://www.sourceofallwealth.com/e-book-install-instructions" style="color:#0056b3; text-decoration:underline;">click here</a>.
 		  </p>
 
