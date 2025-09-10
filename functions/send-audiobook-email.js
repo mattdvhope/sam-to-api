@@ -39,19 +39,12 @@ export const handler = async (event) => {
 
 		  <p style="margin:0 0 16px 0;">
 		    🎧 <strong>Your Audiobook:</strong><br>
-		    The download is available in your <strong>SamCart receipt</strong> and on the <strong>order confirmation page</strong>.
+		    The download is available in your <strong>SamCart order confirmation page</strong>.
 		    No separate link is required.
 		  </p>
 
-		  <p style="margin:0 8px 8px 0;">After downloading, unzip the file to reveal the 151 MP3 tracks, then:</p>
-		  <ul style="margin:0 0 16px 20px; padding:0;">
-		    <li><strong>iPhone/iPad:</strong> Unzip in the <em>Files</em> app, then import the folder into <em>Book Player</em> (free).</li>
-		    <li><strong>Android:</strong> Unzip with your file manager, then open the folder in <em>Voice Audiobook Player</em> (free) or your preferred player.</li>
-		    <li><strong>Desktop:</strong> Unzip and play in Apple Music, VLC, or your preferred player, or sync to your phone.</li>
-		  </ul>
-
 		  <p style="margin:0 0 16px 0;">
-		    For step-by-step guides (with screenshots), 
+		    Go here to access step-by-step guides (with screenshots), 
 		    <a href="https://www.sourceofallwealth.com/e-book-install-instructions" style="color:#0056b3; text-decoration:underline;">click here</a>.
 		  </p>
 

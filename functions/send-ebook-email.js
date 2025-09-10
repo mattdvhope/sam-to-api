@@ -29,15 +29,9 @@ export const handler = async (event) => {
 
       <p style="margin:0 0 16px 0;">
         <a href="https://www.sourceofallwealth.com/e-book-install-instructions"
-           style="color:#0056b3; text-decoration:underline;">Click here</a>
+           style="color:#0056b3; text-decoration:underline;">Enter here</a>
         for step-by-step setup on iPhone/iPad, Android, and desktop.
       </p>
-
-      <ul style="margin:0 0 16px 20px; padding:0;">
-        <li><strong>iPhone/iPad:</strong> Tap the EPUB, then choose <em>Open in Books</em> (Apple Books).</li>
-        <li><strong>Android:</strong> Open with <em>Google Play Books</em> or a free reader like <em>ReadEra</em> or <em>Lithium</em>.</li>
-        <li><strong>Desktop:</strong> Open in <em>Apple Books</em> (macOS) or <em>Calibre</em> (Windows/macOS).</li>
-      </ul>
 
       <p style="margin:0 0 16px 0;">
         Need a hand? Just reply to this email—happy to help.
