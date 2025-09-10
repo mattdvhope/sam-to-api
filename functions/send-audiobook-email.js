@@ -40,8 +40,10 @@ export const handler = async (event) => {
 		  <p style="margin:0 0 16px 0;">
 		    🎧 <strong>Your Audiobook:</strong><br>
 		    The download is available in your <strong>SamCart order confirmation page</strong>.
-		    No separate link is required.
-		  </p>
+      </p>
+
+      <p>No separate link is required.</p>
+
 
 		  <p style="margin:0 0 16px 0;">
 		    Go here to access step-by-step guides (with screenshots): 

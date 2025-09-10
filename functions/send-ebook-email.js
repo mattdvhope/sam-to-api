@@ -28,13 +28,15 @@ export const handler = async (event) => {
       </p>
 
       <p style="margin:0 0 16px 0;">
-        <a href="https://www.sourceofallwealth.com/e-book-install-instructions"
-           style="color:#0056b3; text-decoration:underline;">Enter here</a>
-        for step-by-step setup on iPhone/iPad, Android, and desktop.
+        📖 <strong>Your eBook:</strong><br>
+        The download is available in your <strong>SamCart order confirmation page</strong>.
       </p>
 
+      <p>No separate link is required.</p>
+
       <p style="margin:0 0 16px 0;">
-        Need a hand? Just reply to this email—happy to help.
+        Go here to access step-by-step guides (with screenshots): 
+        <a href="https://www.sourceofallwealth.com/e-book-install-instructions" style="color:#0056b3; text-decoration:underline;">tap here</a>.
       </p>
 
       <p style="margin:0 0 16px 0; font-size:14px; color:#555;">
