@@ -29,7 +29,7 @@ export const handler = async (event) => {
 
       <p style="margin:0 0 16px 0;">
         📖 <strong>Your eBook:</strong><br>
-        The download is available in your <strong>SamCart order confirmation page</strong>.
+        The download is available in your <strong>SamCart order confirmation (thank you) page</strong>.
       </p>
 
       <p>No separate link is required.</p>
